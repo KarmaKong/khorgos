@@ -82,7 +82,7 @@
   {
     "route": "/articles/",
     "lang": "fa",
-    "sourceChars": 1850
+    "sourceChars": 1910
   },
   {
     "route": "/articles/iran-customs-agent/",
@@ -163,6 +163,11 @@
     "route": "/articles/xinjiang-ports/",
     "lang": "fa",
     "sourceChars": 1928
+  },
+  {
+    "route": "/articles/yiwu-or-shenzhen/",
+    "lang": "fa",
+    "sourceChars": 3205
   },
   {
     "route": "/en/articles/22-days/",
@@ -247,7 +252,7 @@
   {
     "route": "/en/articles/",
     "lang": "en",
-    "sourceChars": 1926
+    "sourceChars": 1993
   },
   {
     "route": "/en/articles/iran-customs-agent/",
@@ -328,6 +333,11 @@
     "route": "/en/articles/xinjiang-ports/",
     "lang": "en",
     "sourceChars": 2141
+  },
+  {
+    "route": "/en/articles/yiwu-or-shenzhen/",
+    "lang": "en",
+    "sourceChars": 3652
   },
   {
     "route": "/en/",
@@ -442,7 +452,7 @@
   {
     "route": "/zh/articles/",
     "lang": "zh",
-    "sourceChars": 881
+    "sourceChars": 909
   },
   {
     "route": "/zh/articles/iran-customs-agent/",
@@ -523,6 +533,11 @@
     "route": "/zh/articles/xinjiang-ports/",
     "lang": "zh",
     "sourceChars": 755
+  },
+  {
+    "route": "/zh/articles/yiwu-or-shenzhen/",
+    "lang": "zh",
+    "sourceChars": 1081
   },
   {
     "route": "/zh/legal/",
