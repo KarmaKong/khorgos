@@ -34,3 +34,11 @@ Do not hand-edit `dist/`. After content or script changes, rebuild and run `npm 
 ## Production
 
 Ship commits, verifies `npm run build` and `npm run check`, pushes `origin/main`, then pushes the same commit to `github` `main`. Never force-push either remote. If `github/main` has diverged, stop and ask.
+
+Live domain: `khorgosirantruck.com` (GitHub Pages, CNAME in repo). `www` CNAME → `karmakong.github.io` and 301s to apex. Apex A records are the four GitHub Pages IPv4 addresses. NS stays at GoDaddy (`ns63`/`ns64.domaincontrol.com`). Mail MX/SPF remain on the apex.
+
+Checked 2026-09-26:
+
+- HTTP homepage bytes match `dist/index.html` (108-page build).
+- HTTPS is broken: GitHub has not issued a Pages certificate (`https_certificate` is null, crt.sh has none). Browsers see `*.github.io`. Do not set Enforce HTTPS until the cert exists.
+- This GH token cannot PATCH Pages settings (403). Certificate retry is: GitHub → repo Settings → Pages → remove custom domain, save, add `khorgosirantruck.com` again. Apex has no AAAA records; add the four GitHub Pages IPv6 addresses if cert stays stuck.
