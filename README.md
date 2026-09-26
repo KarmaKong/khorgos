@@ -2,6 +2,8 @@
 
 Static multilingual website for khorgosirantruck.com. Persian `/` (RTL), English `/en/`, Chinese `/zh.html`. Built with Node.js 22+, linkedom and native CSS.
 
+Managed from the Amp project [Khorgos](https://ampcode.com/@user_01KM9VNRCHX1NYP7A0BSDCBA07/Khorgos). Edit and preview there; **Ship** publishes this GitHub repository, which GitHub Pages deploys to production.
+
 ## Build
 
 ```sh
@@ -11,7 +13,7 @@ npm run check
 npm run preview
 ```
 
-The generated website is in `dist/`. Preview uses Python 3 at http://127.0.0.1:4174/.
+The generated website is in `dist/`. In an Amp orb, run `amp orb services ensure` and open the preview portal. Locally, `npm run preview` serves `dist/` on port 4174 (or `$PORT`).
 
 ## Cloudflare Pages
 

@@ -4,7 +4,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs",
-    "preview": "python3 -m http.server 4174 --directory dist --bind 127.0.0.1"
+    "preview": "python3 -m http.server ${PORT:-4174} --directory dist --bind 0.0.0.0"
   },
   "devDependencies": { "linkedom": "0.18.12" }
 }

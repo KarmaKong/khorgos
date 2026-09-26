@@ -1,0 +1,8 @@
+services:
+  preview:
+    command: npm run build && python3 -m http.server "$PORT" --directory dist --bind 0.0.0.0
+    health: /
+    portal:
+      url: /
+      title: khorgosirantruck preview
+      description: Generated site preview. Production is https://khorgosirantruck.com via GitHub Pages.
