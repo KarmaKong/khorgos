@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 220" role="img" aria-label="KHORGOS reverse logo">
+  <rect width="920" height="220" fill="#1F3A5F"/>
+  <g transform="translate(0 14)" fill="#fff">
+    <rect x="38" y="36" width="30" height="92" rx="2"/>
+    <rect x="152" y="36" width="30" height="92" rx="2"/>
+    <rect x="52" y="22" width="116" height="24" rx="2"/>
+    <rect x="64" y="10" width="92" height="8" rx="2"/>
+    <path d="M20 160 L84 104 H100 L72 160 Z"/>
+    <path d="M200 160 L136 104 H120 L148 160 Z"/>
+    <path d="M98 160 L106 112 H114 L122 160 Z"/>
+    <path d="M94 92 L110 78 L126 92 Z"/>
+  </g>
+  <text x="250" y="112" fill="#fff" font-family="Montserrat, Arial, sans-serif" font-size="86" font-weight="800" letter-spacing="9">KHORGOS</text>
+  <text x="256" y="160" fill="#fff" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="600" letter-spacing="4">IRAN &amp; CENTRAL ASIA TRUCKING</text>
+</svg>

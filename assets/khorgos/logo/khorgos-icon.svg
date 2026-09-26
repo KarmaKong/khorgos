@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180" role="img" aria-label="KHORGOS icon">
+  <g fill="#1F3A5F">
+    <rect x="38" y="36" width="30" height="92" rx="2"/>
+    <rect x="152" y="36" width="30" height="92" rx="2"/>
+    <rect x="52" y="22" width="116" height="24" rx="2"/>
+    <rect x="64" y="10" width="92" height="8" rx="2"/>
+    <path d="M20 160 L84 104 H100 L72 160 Z"/>
+    <path d="M200 160 L136 104 H120 L148 160 Z"/>
+    <path d="M98 160 L106 112 H114 L122 160 Z"/>
+  </g>
+  <path d="M94 92 L110 78 L126 92 Z" fill="#E3A33B"/>
+</svg>

@@ -1,0 +1,542 @@
+[
+  {
+    "route": "/articles/22-days/",
+    "lang": "fa",
+    "sourceChars": 5164
+  },
+  {
+    "route": "/articles/after-arrival/",
+    "lang": "fa",
+    "sourceChars": 2568
+  },
+  {
+    "route": "/articles/after-the-quote/",
+    "lang": "fa",
+    "sourceChars": 2782
+  },
+  {
+    "route": "/articles/auto-parts/",
+    "lang": "fa",
+    "sourceChars": 3296
+  },
+  {
+    "route": "/articles/building-materials/",
+    "lang": "fa",
+    "sourceChars": 3321
+  },
+  {
+    "route": "/articles/central-asia-transit/",
+    "lang": "fa",
+    "sourceChars": 2941
+  },
+  {
+    "route": "/articles/china-to-iran-tir-trucking/",
+    "lang": "fa",
+    "sourceChars": 8237
+  },
+  {
+    "route": "/articles/cku-railway/",
+    "lang": "fa",
+    "sourceChars": 2835
+  },
+  {
+    "route": "/articles/departures/",
+    "lang": "fa",
+    "sourceChars": 2158
+  },
+  {
+    "route": "/articles/documents/",
+    "lang": "fa",
+    "sourceChars": 2445
+  },
+  {
+    "route": "/articles/electronics/",
+    "lang": "fa",
+    "sourceChars": 3325
+  },
+  {
+    "route": "/articles/first-shipment/",
+    "lang": "fa",
+    "sourceChars": 2646
+  },
+  {
+    "route": "/articles/freight-cost/",
+    "lang": "fa",
+    "sourceChars": 2318
+  },
+  {
+    "route": "/articles/ftl-vs-ltl/",
+    "lang": "fa",
+    "sourceChars": 2071
+  },
+  {
+    "route": "/articles/hormuz-insurance/",
+    "lang": "fa",
+    "sourceChars": 1943
+  },
+  {
+    "route": "/articles/hub-to-customs-vs-ddp/",
+    "lang": "fa",
+    "sourceChars": 5085
+  },
+  {
+    "route": "/articles/",
+    "lang": "fa",
+    "sourceChars": 1850
+  },
+  {
+    "route": "/articles/iran-customs-agent/",
+    "lang": "fa",
+    "sourceChars": 2241
+  },
+  {
+    "route": "/articles/lcl/",
+    "lang": "fa",
+    "sourceChars": 1849
+  },
+  {
+    "route": "/articles/lithium-batteries/",
+    "lang": "fa",
+    "sourceChars": 2597
+  },
+  {
+    "route": "/articles/machinery/",
+    "lang": "fa",
+    "sourceChars": 3731
+  },
+  {
+    "route": "/articles/quote/",
+    "lang": "fa",
+    "sourceChars": 2797
+  },
+  {
+    "route": "/articles/sea-vs-road-vs-rail/",
+    "lang": "fa",
+    "sourceChars": 2741
+  },
+  {
+    "route": "/articles/solar-pv/",
+    "lang": "fa",
+    "sourceChars": 3028
+  },
+  {
+    "route": "/articles/tir/",
+    "lang": "fa",
+    "sourceChars": 2955
+  },
+  {
+    "route": "/articles/tir-carnet-shortage/",
+    "lang": "fa",
+    "sourceChars": 3815
+  },
+  {
+    "route": "/articles/transit-time/",
+    "lang": "fa",
+    "sourceChars": 4878
+  },
+  {
+    "route": "/articles/uzbekistan/",
+    "lang": "fa",
+    "sourceChars": 1779
+  },
+  {
+    "route": "/articles/vehicle-carrier-loading/",
+    "lang": "fa",
+    "sourceChars": 6344
+  },
+  {
+    "route": "/articles/vehicle-export/",
+    "lang": "fa",
+    "sourceChars": 4498
+  },
+  {
+    "route": "/articles/wuqia-irkeshtam/",
+    "lang": "fa",
+    "sourceChars": 2851
+  },
+  {
+    "route": "/articles/wuqia-khorgos/",
+    "lang": "fa",
+    "sourceChars": 3369
+  },
+  {
+    "route": "/articles/xinjiang-ports/",
+    "lang": "fa",
+    "sourceChars": 1928
+  },
+  {
+    "route": "/en/articles/22-days/",
+    "lang": "en",
+    "sourceChars": 6143
+  },
+  {
+    "route": "/en/articles/after-arrival/",
+    "lang": "en",
+    "sourceChars": 3004
+  },
+  {
+    "route": "/en/articles/after-the-quote/",
+    "lang": "en",
+    "sourceChars": 3382
+  },
+  {
+    "route": "/en/articles/auto-parts/",
+    "lang": "en",
+    "sourceChars": 3770
+  },
+  {
+    "route": "/en/articles/building-materials/",
+    "lang": "en",
+    "sourceChars": 4006
+  },
+  {
+    "route": "/en/articles/central-asia-transit/",
+    "lang": "en",
+    "sourceChars": 3261
+  },
+  {
+    "route": "/en/articles/china-to-iran-tir-trucking/",
+    "lang": "en",
+    "sourceChars": 9129
+  },
+  {
+    "route": "/en/articles/cku-railway/",
+    "lang": "en",
+    "sourceChars": 3445
+  },
+  {
+    "route": "/en/articles/departures/",
+    "lang": "en",
+    "sourceChars": 2487
+  },
+  {
+    "route": "/en/articles/documents/",
+    "lang": "en",
+    "sourceChars": 2771
+  },
+  {
+    "route": "/en/articles/electronics/",
+    "lang": "en",
+    "sourceChars": 3926
+  },
+  {
+    "route": "/en/articles/first-shipment/",
+    "lang": "en",
+    "sourceChars": 3422
+  },
+  {
+    "route": "/en/articles/freight-cost/",
+    "lang": "en",
+    "sourceChars": 2648
+  },
+  {
+    "route": "/en/articles/ftl-vs-ltl/",
+    "lang": "en",
+    "sourceChars": 2278
+  },
+  {
+    "route": "/en/articles/hormuz-insurance/",
+    "lang": "en",
+    "sourceChars": 2252
+  },
+  {
+    "route": "/en/articles/hub-to-customs-vs-ddp/",
+    "lang": "en",
+    "sourceChars": 5983
+  },
+  {
+    "route": "/en/articles/",
+    "lang": "en",
+    "sourceChars": 1926
+  },
+  {
+    "route": "/en/articles/iran-customs-agent/",
+    "lang": "en",
+    "sourceChars": 2446
+  },
+  {
+    "route": "/en/articles/lcl/",
+    "lang": "en",
+    "sourceChars": 2118
+  },
+  {
+    "route": "/en/articles/lithium-batteries/",
+    "lang": "en",
+    "sourceChars": 2992
+  },
+  {
+    "route": "/en/articles/machinery/",
+    "lang": "en",
+    "sourceChars": 4524
+  },
+  {
+    "route": "/en/articles/quote/",
+    "lang": "en",
+    "sourceChars": 3073
+  },
+  {
+    "route": "/en/articles/sea-vs-road-vs-rail/",
+    "lang": "en",
+    "sourceChars": 2982
+  },
+  {
+    "route": "/en/articles/solar-pv/",
+    "lang": "en",
+    "sourceChars": 3695
+  },
+  {
+    "route": "/en/articles/tir/",
+    "lang": "en",
+    "sourceChars": 3595
+  },
+  {
+    "route": "/en/articles/tir-carnet-shortage/",
+    "lang": "en",
+    "sourceChars": 4311
+  },
+  {
+    "route": "/en/articles/transit-time/",
+    "lang": "en",
+    "sourceChars": 5825
+  },
+  {
+    "route": "/en/articles/uzbekistan/",
+    "lang": "en",
+    "sourceChars": 2067
+  },
+  {
+    "route": "/en/articles/vehicle-carrier-loading/",
+    "lang": "en",
+    "sourceChars": 7697
+  },
+  {
+    "route": "/en/articles/vehicle-export/",
+    "lang": "en",
+    "sourceChars": 5426
+  },
+  {
+    "route": "/en/articles/wuqia-irkeshtam/",
+    "lang": "en",
+    "sourceChars": 3222
+  },
+  {
+    "route": "/en/articles/wuqia-khorgos/",
+    "lang": "en",
+    "sourceChars": 3918
+  },
+  {
+    "route": "/en/articles/xinjiang-ports/",
+    "lang": "en",
+    "sourceChars": 2141
+  },
+  {
+    "route": "/en/",
+    "lang": "en",
+    "sourceChars": 8902
+  },
+  {
+    "route": "/en/legal/",
+    "lang": "en",
+    "sourceChars": 1879
+  },
+  {
+    "route": "/en/privacy/",
+    "lang": "en",
+    "sourceChars": 2128
+  },
+  {
+    "route": "/",
+    "lang": "fa",
+    "sourceChars": 7725
+  },
+  {
+    "route": "/legal/",
+    "lang": "fa",
+    "sourceChars": 1585
+  },
+  {
+    "route": "/privacy/",
+    "lang": "fa",
+    "sourceChars": 2049
+  },
+  {
+    "route": "/zh/articles/22-days/",
+    "lang": "zh",
+    "sourceChars": 1966
+  },
+  {
+    "route": "/zh/articles/after-arrival/",
+    "lang": "zh",
+    "sourceChars": 989
+  },
+  {
+    "route": "/zh/articles/after-the-quote/",
+    "lang": "zh",
+    "sourceChars": 1022
+  },
+  {
+    "route": "/zh/articles/auto-parts/",
+    "lang": "zh",
+    "sourceChars": 1315
+  },
+  {
+    "route": "/zh/articles/building-materials/",
+    "lang": "zh",
+    "sourceChars": 1337
+  },
+  {
+    "route": "/zh/articles/central-asia-transit/",
+    "lang": "zh",
+    "sourceChars": 1092
+  },
+  {
+    "route": "/zh/articles/china-to-iran-tir-trucking/",
+    "lang": "zh",
+    "sourceChars": 3132
+  },
+  {
+    "route": "/zh/articles/cku-railway/",
+    "lang": "zh",
+    "sourceChars": 1090
+  },
+  {
+    "route": "/zh/articles/departures/",
+    "lang": "zh",
+    "sourceChars": 801
+  },
+  {
+    "route": "/zh/articles/documents/",
+    "lang": "zh",
+    "sourceChars": 956
+  },
+  {
+    "route": "/zh/articles/electronics/",
+    "lang": "zh",
+    "sourceChars": 1368
+  },
+  {
+    "route": "/zh/articles/first-shipment/",
+    "lang": "zh",
+    "sourceChars": 1055
+  },
+  {
+    "route": "/zh/articles/freight-cost/",
+    "lang": "zh",
+    "sourceChars": 836
+  },
+  {
+    "route": "/zh/articles/ftl-vs-ltl/",
+    "lang": "zh",
+    "sourceChars": 785
+  },
+  {
+    "route": "/zh/articles/hormuz-insurance/",
+    "lang": "zh",
+    "sourceChars": 737
+  },
+  {
+    "route": "/zh/articles/hub-to-customs-vs-ddp/",
+    "lang": "zh",
+    "sourceChars": 2155
+  },
+  {
+    "route": "/zh/articles/",
+    "lang": "zh",
+    "sourceChars": 881
+  },
+  {
+    "route": "/zh/articles/iran-customs-agent/",
+    "lang": "zh",
+    "sourceChars": 874
+  },
+  {
+    "route": "/zh/articles/lcl/",
+    "lang": "zh",
+    "sourceChars": 729
+  },
+  {
+    "route": "/zh/articles/lithium-batteries/",
+    "lang": "zh",
+    "sourceChars": 1054
+  },
+  {
+    "route": "/zh/articles/machinery/",
+    "lang": "zh",
+    "sourceChars": 1466
+  },
+  {
+    "route": "/zh/articles/quote/",
+    "lang": "zh",
+    "sourceChars": 1102
+  },
+  {
+    "route": "/zh/articles/sea-vs-road-vs-rail/",
+    "lang": "zh",
+    "sourceChars": 992
+  },
+  {
+    "route": "/zh/articles/solar-pv/",
+    "lang": "zh",
+    "sourceChars": 1081
+  },
+  {
+    "route": "/zh/articles/tir/",
+    "lang": "zh",
+    "sourceChars": 1118
+  },
+  {
+    "route": "/zh/articles/tir-carnet-shortage/",
+    "lang": "zh",
+    "sourceChars": 1393
+  },
+  {
+    "route": "/zh/articles/transit-time/",
+    "lang": "zh",
+    "sourceChars": 1881
+  },
+  {
+    "route": "/zh/articles/uzbekistan/",
+    "lang": "zh",
+    "sourceChars": 702
+  },
+  {
+    "route": "/zh/articles/vehicle-carrier-loading/",
+    "lang": "zh",
+    "sourceChars": 2418
+  },
+  {
+    "route": "/zh/articles/vehicle-export/",
+    "lang": "zh",
+    "sourceChars": 1774
+  },
+  {
+    "route": "/zh/articles/wuqia-irkeshtam/",
+    "lang": "zh",
+    "sourceChars": 1101
+  },
+  {
+    "route": "/zh/articles/wuqia-khorgos/",
+    "lang": "zh",
+    "sourceChars": 1365
+  },
+  {
+    "route": "/zh/articles/xinjiang-ports/",
+    "lang": "zh",
+    "sourceChars": 755
+  },
+  {
+    "route": "/zh/legal/",
+    "lang": "zh",
+    "sourceChars": 561
+  },
+  {
+    "route": "/zh/privacy/",
+    "lang": "zh",
+    "sourceChars": 795
+  },
+  {
+    "route": "/zh.html",
+    "lang": "zh",
+    "sourceChars": 3394
+  }
+]

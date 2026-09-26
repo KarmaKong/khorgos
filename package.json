@@ -1,0 +1,10 @@
+{
+  "name": "khorgosirantruck",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "preview": "python3 -m http.server 4174 --directory dist --bind 127.0.0.1"
+  },
+  "devDependencies": { "linkedom": "0.18.12" }
+}
