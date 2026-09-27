@@ -10,7 +10,7 @@ const origin = 'https://chinairantrucks.com';
 const domain = (process.env.SITE_ORIGIN || 'https://khorgosirantruck.com').replace(/\/$/, '');
 if (domain && !/^https:\/\/[a-z0-9.-]+$/i.test(domain)) throw new Error('SITE_ORIGIN must be an HTTPS origin');
 const walk = dir => fs.readdirSync(dir, {withFileTypes:true}).flatMap(e => e.isDirectory() ? walk(path.join(dir,e.name)) : [path.join(dir,e.name)]);
-const files = walk(source).filter(p=>p.endsWith('.html'));
+const files = walk(source).filter(p=>p.endsWith('.html') && !/^google[a-f0-9]+\.html$/i.test(path.basename(p)));
 fs.mkdirSync(out,{recursive:true});
 for(const dir of ['img','fonts']) if(fs.existsSync(path.join(source,dir))) fs.cpSync(path.join(source,dir),path.join(out,dir),{recursive:true});
 fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true,filter:p=>!p.endsWith('.png')});
@@ -108,6 +108,9 @@ for(const file of files){
   redesign(d,{lang,isHome,root,c,domain,route});
   const dest=path.join(out,rel);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,'<!DOCTYPE html>\n'+d.documentElement.outerHTML);
   audit.push({route,lang,sourceChars:baseline.length});
+}
+for (const name of fs.readdirSync(source).filter(n => /^google[a-f0-9]+\.html$/i.test(n))) {
+  fs.copyFileSync(path.join(source, name), path.join(out, name));
 }
 fs.writeFileSync(path.join(out,'_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 fs.writeFileSync(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\n${domain?'Sitemap: '+domain+'/sitemap.xml\n':''}`);
