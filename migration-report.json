@@ -25,6 +25,11 @@
     "sourceChars": 3321
   },
   {
+    "route": "/articles/cbm-gross-weight/",
+    "lang": "fa",
+    "sourceChars": 2111
+  },
+  {
     "route": "/articles/central-asia-transit/",
     "lang": "fa",
     "sourceChars": 2941
@@ -82,7 +87,7 @@
   {
     "route": "/articles/",
     "lang": "fa",
-    "sourceChars": 1910
+    "sourceChars": 1967
   },
   {
     "route": "/articles/iran-customs-agent/",
@@ -195,6 +200,11 @@
     "sourceChars": 4006
   },
   {
+    "route": "/en/articles/cbm-gross-weight/",
+    "lang": "en",
+    "sourceChars": 2466
+  },
+  {
     "route": "/en/articles/central-asia-transit/",
     "lang": "en",
     "sourceChars": 3261
@@ -252,7 +262,7 @@
   {
     "route": "/en/articles/",
     "lang": "en",
-    "sourceChars": 1993
+    "sourceChars": 2055
   },
   {
     "route": "/en/articles/iran-customs-agent/",
@@ -395,6 +405,11 @@
     "sourceChars": 1337
   },
   {
+    "route": "/zh/articles/cbm-gross-weight/",
+    "lang": "zh",
+    "sourceChars": 787
+  },
+  {
     "route": "/zh/articles/central-asia-transit/",
     "lang": "zh",
     "sourceChars": 1092
@@ -452,7 +467,7 @@
   {
     "route": "/zh/articles/",
     "lang": "zh",
-    "sourceChars": 909
+    "sourceChars": 935
   },
   {
     "route": "/zh/articles/iran-customs-agent/",
