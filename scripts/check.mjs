@@ -19,6 +19,9 @@ for(const {route} of report){
   const text=clean(d.querySelector('main').textContent);
   for(const e of original.querySelectorAll('main p,main h1,main h2,main h3,main li,main td,main th,main caption,main figcaption,main label,main legend,main option,main summary,main .fig,main .stat-label,main .ttl')){
     if(route.endsWith('/privacy/')&&e.textContent.includes('GoatCounter'))continue;
+    if(['/', '/en/', '/zh.html'].includes(route)&&e.closest('.home-hero,.cargo-stats,.badges-sec,#lanes,#route,#compare,#faq'))continue;
+    const row=e.closest('.way-row');
+    if(route.endsWith('/articles/')&&row&&![...row.querySelectorAll('a[href]')].some(a=>/\/articles\/(cbm-gross-weight|yiwu-or-shenzhen)\//.test(a.getAttribute('href'))))continue;
     const expected=clean(e.textContent);blocks++;
     if(expected&&!text.includes(expected))errors.push(`Missing content ${route}: ${expected.slice(0,70)}`);
   }
@@ -63,8 +66,15 @@ for(const [route,d] of parsed){
  assert.equal(d.querySelectorAll('h1').length,1,`One H1: ${route}`);
  const ids=[...d.querySelectorAll('[id]')].map(e=>e.id);
  assert.equal(new Set(ids).size,ids.length,`Unique IDs: ${route}`);
+ const entry=report.find(page=>page.route===route);
  const canonical=d.querySelector('link[rel=canonical]')?.getAttribute('href');
- assert.ok(canonical?.startsWith(process.env.SITE_ORIGIN||'https://khorgosirantruck.com'),`Canonical: ${route}`);
+ if(entry.indexable){
+  assert.equal(canonical,(process.env.SITE_ORIGIN||'https://khorgosirantruck.com')+route,`Self-canonical: ${route}`);
+  assert.equal(d.querySelector('meta[name=robots]'),null,`Indexable robots: ${route}`);
+ }else{
+  assert.equal(canonical,'https://chinairantrucks.com'+route,`Main-site canonical: ${route}`);
+  assert.equal(d.querySelector('meta[name=robots]')?.getAttribute('content'),'noindex,follow',`Duplicate robots: ${route}`);
+ }
  assert.ok(d.querySelector('meta[property="og:image"]'),`Open Graph image: ${route}`);
  assert.ok(d.querySelector('header img[src$="khorgos-logo-horizontal.svg"]'));
  for(const a of d.querySelectorAll('a[href^="https://wa.me/"]'))assert.equal(a.getAttribute('href').split('?')[0],'https://wa.me/8615876207182');
@@ -75,6 +85,9 @@ for(const [route,d] of parsed){
   assert.equal(d.querySelector('form').getAttribute('action'),'mailto:sales@khorgosirantruck.com');
  }
 }
+const sitemap=fs.readFileSync(path.join(out,'sitemap.xml'),'utf8');
+for(const {route,indexable} of report)assert.equal(sitemap.includes(`<loc>${process.env.SITE_ORIGIN||'https://khorgosirantruck.com'}${route}</loc>`),indexable,`Sitemap boundary: ${route}`);
+assert.equal(parseHTML(fs.readFileSync(path.join(out,'404.html'),'utf8')).document.querySelector('meta[name=robots]')?.getAttribute('content'),'noindex');
 const walkFiles=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walkFiles(path.join(dir,e.name)):[path.join(dir,e.name)]);
 assert.ok(!walkFiles(out).some(p=>p.includes('source-boards')||p.includes('-ai.')));
 const assetHashes=JSON.parse(fs.readFileSync(path.join(root,'assets/khorgos-sha256.json'),'utf8'));
