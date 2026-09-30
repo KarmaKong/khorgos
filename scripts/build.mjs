@@ -27,6 +27,37 @@ const brand = '<span class="brand" dir="ltr"><img src="/assets/favicon.svg" widt
 function node(doc, html){const t=doc.createElement('template');t.innerHTML=html;return t.content.firstElementChild;}
 function routeOf(rel){return '/'+rel.replace(/index\.html$/,'');}
 function localURL(value,url){try{const u=new URL(value,url);return u.origin===origin?u.pathname+u.search+u.hash:value;}catch{return value;}}
+// JSON-LD is derived from the rendered page only: visible headings, FAQ, dates, breadcrumbs and article list.
+// No legal entity, address, prices, transit times or capabilities are declared beyond what the page shows.
+function structuredData(d,{lang,route,isHome}){
+  const main=d.querySelector('main'),url=domain+route,org={'@id':domain+'/#organization'},site={'@id':domain+'/#website'};
+  const text=e=>e.textContent.replace(/\s+/g,' ').trim();
+  const inLanguage={fa:'fa',en:'en',zh:'zh-Hans'}[lang];
+  const name=text(main.querySelector('h1')),description=d.querySelector('meta[name="description"]')?.getAttribute('content');
+  const isIndex=route.endsWith('/articles/'),isArticle=!isHome&&!isIndex&&route.includes('/articles/');
+  const faq=[...main.querySelectorAll('.faq details')].map(e=>{const a=e.cloneNode(true);a.querySelector('summary').remove();return {'@type':'Question',name:text(e.querySelector('summary')),acceptedAnswer:{'@type':'Answer',text:text(a)}};});
+  const date=main.querySelector('time[datetime]')?.getAttribute('datetime')||text(main).match(/(20\d\d-\d\d-\d\d)(?!.*20\d\d-\d\d-\d\d)/)?.[1];
+  const graph=[
+    {'@type':'Organization',...org,name:'KHORGOS Iran Truck',alternateName:'khorgosirantruck',url:domain+'/',logo:domain+'/assets/khorgos/logo/khorgos-logo-horizontal.svg',email:'sales@khorgosirantruck.com'},
+    {'@type':'WebSite',...site,name:'KHORGOS Iran Truck',alternateName:'khorgosirantruck',url:domain+'/',inLanguage:['fa','en','zh-Hans'],publisher:org}
+  ];
+  const page={'@type':faq.length?'FAQPage':isIndex?'CollectionPage':'WebPage','@id':url+'#webpage',url,name:isHome?d.title:name,description,inLanguage,isPartOf:site};
+  if(isIndex)delete page.description; // Legacy index meta still describes the full main-site guide list, not the trimmed Khorgos journal.
+  if(isHome)page.about=org;
+  if(faq.length)page.mainEntity=faq;
+  if(isIndex)page.mainEntity={'@type':'ItemList',itemListElement:[...main.querySelectorAll('.waybill .way-row')].map((a,i)=>({'@type':'ListItem',position:i+1,url:domain+a.getAttribute('href'),name:text(a.querySelector('.ttl'))}))};
+  if(!isHome&&!isArticle&&!isIndex&&date)page.dateModified=date;
+  const crumbs=[...main.querySelectorAll('.breadcrumbs a')].map(a=>({name:text(a),item:domain+a.getAttribute('href')}));
+  if(crumbs.length){
+    if(crumbs.at(-1).item!==url)crumbs.push({name,item:url});
+    page.breadcrumb={'@type':'BreadcrumbList',itemListElement:crumbs.map((x,i)=>({'@type':'ListItem',position:i+1,...x}))};
+  }
+  graph.push(page);
+  if(isArticle)graph.push({'@type':'Article','@id':url+'#article',headline:name,description,inLanguage,datePublished:date,image:d.querySelector('meta[property="og:image"]')?.getAttribute('content'),author:org,publisher:org,mainEntityOfPage:{'@id':page['@id']},isPartOf:site});
+  const script=d.createElement('script');script.setAttribute('type','application/ld+json');
+  script.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c');
+  return script;
+}
 let audit=[];
 for(const file of files){
   const rel=path.relative(source,file), route=routeOf(rel), url=origin+route;
@@ -52,7 +83,9 @@ for(const file of files){
     return `<a href="${target}" lang="${l}" ${isCurrent?'aria-current="page"':''}>${label}</a>`;
   }).join('');
   // Keep copy and business links, but remove the previous site's styling and telemetry.
-  d.querySelectorAll('script,style,link[rel="stylesheet"],link[rel*="icon"]').forEach(e=>e.remove());
+  d.querySelectorAll('script:not([type="application/ld+json"]),style,link[rel="stylesheet"],link[rel*="icon"]').forEach(e=>e.remove());
+  // Source JSON-LD describes the chinairantrucks entity (old contacts, Wuqia-first claims); it is replaced by structuredData() below.
+  d.querySelectorAll('script[type="application/ld+json"]').forEach(e=>e.remove());
   d.querySelectorAll('noscript').forEach(e=>{if(!e.closest('main'))e.remove();});
   if(main.querySelector('[data-quote-form]'))d.body.appendChild(node(d,'<script defer src="/assets/quote-form.js"></script>'));
   d.querySelectorAll('link[rel="canonical"],meta[name="robots"],meta[property="og:url"],meta[property="og:image"],meta[property="og:image:width"],meta[property="og:image:height"],meta[name="twitter:image"]').forEach(e=>e.remove());
@@ -98,10 +131,11 @@ for(const file of files){
   }else{
     d.body.classList.add('reading-page');
     const isIndex=/\/articles\/$/.test(route);d.body.classList.add(isIndex?'journal-index':'article-page');
-    const h1=main.querySelector('h1');if(h1)h1.before(node(d,`<p class="breadcrumbs"><a href="${c.home}">${c.back}</a><span>/</span><a href="${c.articles}">${c.index}</a></p>`));
+    const isPolicy=/\/(legal|privacy)\/$/.test(route);
+    const h1=main.querySelector('h1');if(h1)h1.before(node(d,`<p class="breadcrumbs"><a href="${c.home}">${c.back}</a>${isPolicy?'':`<span>/</span><a href="${c.articles}">${c.index}</a>`}</p>`));
     if(isIndex){
       const rows=[...main.querySelectorAll('.way-row')];
-      const kept=rows.filter(row=>[...row.querySelectorAll('a[href]')].some(a=>[...uniqueArticleSlugs].some(slug=>a.getAttribute('href').includes(`/articles/${slug}/`))));
+      const kept=rows.filter(row=>[row,...row.querySelectorAll('a[href]')].filter(a=>a.matches('a[href]')).some(a=>[...uniqueArticleSlugs].some(slug=>a.getAttribute('href').includes(`/articles/${slug}/`))));
       rows.filter(row=>!kept.includes(row)).forEach(row=>row.remove());
       if(kept.length){const grid=node(d,'<div class="waybill"></div>');kept[0].before(grid);kept.forEach(r=>grid.append(r));}
     }
@@ -120,6 +154,7 @@ for(const file of files){
   for(const table of main.querySelectorAll('table'))if(!table.parentElement.classList.contains('compare-scroll')){const wrap=d.createElement('div');wrap.className='compare-scroll';table.replaceWith(wrap);wrap.append(table);}
   for(const img of main.querySelectorAll('img')){if(!img.hasAttribute('loading')&&!img.hasAttribute('fetchpriority'))img.loading='lazy';}
   redesign(d,{lang,isHome,root,c,domain,route});
+  if(indexable&&domain)d.head.appendChild(structuredData(d,{lang,route,isHome}));
   const dest=path.join(out,rel);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,'<!DOCTYPE html>\n'+d.documentElement.outerHTML);
   audit.push({route,lang,indexable,sourceChars:baseline.length});
 }
