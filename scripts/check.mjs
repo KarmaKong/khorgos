@@ -21,7 +21,7 @@ for(const {route} of report){
     if(route.endsWith('/privacy/')&&e.textContent.includes('GoatCounter'))continue;
     if(['/', '/en/', '/zh.html'].includes(route)&&e.closest('.home-hero,.cargo-stats,.badges-sec,#lanes,#route,#compare,#faq'))continue;
     const row=e.closest('.way-row');
-    if(route.endsWith('/articles/')&&row&&![...row.querySelectorAll('a[href]')].some(a=>/\/articles\/(cbm-gross-weight|yiwu-or-shenzhen)\//.test(a.getAttribute('href'))))continue;
+    if(route.endsWith('/articles/')&&row&&![row,...row.querySelectorAll('a[href]')].filter(a=>a.matches('a[href]')).some(a=>/\/articles\/(cbm-gross-weight|yiwu-or-shenzhen|turkmenistan-transit)\//.test(new URL(a.getAttribute('href'),'https://x'+route).pathname)))continue;
     const expected=clean(e.textContent);blocks++;
     if(expected&&!text.includes(expected))errors.push(`Missing content ${route}: ${expected.slice(0,70)}`);
   }
@@ -86,7 +86,12 @@ for(const [route,d] of parsed){
  }
 }
 const sitemap=fs.readFileSync(path.join(out,'sitemap.xml'),'utf8');
-for(const {route,indexable} of report)assert.equal(sitemap.includes(`<loc>${process.env.SITE_ORIGIN||'https://khorgosirantruck.com'}${route}</loc>`),indexable,`Sitemap boundary: ${route}`);
+const llms=fs.readFileSync(path.join(out,'llms.txt'),'utf8');
+for(const {route,indexable} of report){
+  const loc=`${process.env.SITE_ORIGIN||'https://khorgosirantruck.com'}${route}`;
+  assert.equal(sitemap.includes(`<loc>${loc}</loc>`),indexable,`Sitemap boundary: ${route}`);
+  assert.equal(llms.includes(loc),indexable,`llms.txt boundary: ${route}`);
+}
 assert.equal(parseHTML(fs.readFileSync(path.join(out,'404.html'),'utf8')).document.querySelector('meta[name=robots]')?.getAttribute('content'),'noindex');
 const walkFiles=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walkFiles(path.join(dir,e.name)):[path.join(dir,e.name)]);
 assert.ok(!walkFiles(out).some(p=>p.includes('source-boards')||p.includes('-ai.')));

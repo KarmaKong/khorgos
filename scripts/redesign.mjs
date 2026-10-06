@@ -78,7 +78,7 @@ export function redesign(d,{lang,isHome,root,c,domain,route}){
  }
  if(!isHome&&!d.body.classList.contains('journal-index')&&!/\/(legal|privacy)\/$/.test(route)){
   const h1=main.querySelector('h1');
-  h1.after(make(d,`<figure class="article-banner">${picture(/central-asia|uzbekistan/.test(route)?'cards/central-asia-route.webp':/quote|first-shipment|documents/.test(route)?'cards/xinjiang-warehouse.webp':'hero/hero-thumbnail-alt.webp',/central-asia|uzbekistan|quote|first-shipment|documents/.test(route)?686:1774,/central-asia|uzbekistan|quote|first-shipment|documents/.test(route)?764:887)}<figcaption>${t.art}</figcaption></figure>`));
+  h1.after(make(d,`<figure class="article-banner">${picture(/central-asia|uzbekistan|turkmenistan/.test(route)?'cards/central-asia-route.webp':/quote|first-shipment|documents/.test(route)?'cards/xinjiang-warehouse.webp':'hero/hero-thumbnail-alt.webp',/central-asia|uzbekistan|turkmenistan|quote|first-shipment|documents/.test(route)?686:1774,/central-asia|uzbekistan|turkmenistan|quote|first-shipment|documents/.test(route)?764:887)}<figcaption>${t.art}</figcaption></figure>`));
  }
  for(const form of d.querySelectorAll('form[data-quote-form]')){
   form.setAttribute('aria-describedby','quote-note');
