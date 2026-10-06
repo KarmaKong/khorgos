@@ -9,7 +9,7 @@ const out = path.join(root, 'dist');
 const origin = 'https://chinairantrucks.com';
 const domain = (process.env.SITE_ORIGIN || 'https://khorgosirantruck.com').replace(/\/$/, '');
 if (domain && !/^https:\/\/[a-z0-9.-]+$/i.test(domain)) throw new Error('SITE_ORIGIN must be an HTTPS origin');
-const uniqueArticleSlugs = new Set(['cbm-gross-weight', 'yiwu-or-shenzhen']);
+const uniqueArticleSlugs = new Set(['cbm-gross-weight', 'yiwu-or-shenzhen', 'turkmenistan-transit']);
 const isIndexableRoute = route =>
   ['/', '/en/', '/zh.html', '/articles/', '/en/articles/', '/zh/articles/', '/legal/', '/en/legal/', '/zh/legal/', '/privacy/', '/en/privacy/', '/zh/privacy/'].includes(route) ||
   [...uniqueArticleSlugs].some(slug => route.endsWith(`/articles/${slug}/`));
@@ -101,7 +101,7 @@ for(const file of files){
     const h1=main.querySelector('h1');if(h1)h1.before(node(d,`<p class="breadcrumbs"><a href="${c.home}">${c.back}</a><span>/</span><a href="${c.articles}">${c.index}</a></p>`));
     if(isIndex){
       const rows=[...main.querySelectorAll('.way-row')];
-      const kept=rows.filter(row=>[...row.querySelectorAll('a[href]')].some(a=>[...uniqueArticleSlugs].some(slug=>a.getAttribute('href').includes(`/articles/${slug}/`))));
+      const kept=rows.filter(row=>[row,...row.querySelectorAll('a[href]')].filter(a=>a.matches('a[href]')).some(a=>[...uniqueArticleSlugs].some(slug=>a.getAttribute('href').includes(`/articles/${slug}/`))));
       rows.filter(row=>!kept.includes(row)).forEach(row=>row.remove());
       if(kept.length){const grid=node(d,'<div class="waybill"></div>');kept[0].before(grid);kept.forEach(r=>grid.append(r));}
     }
@@ -129,6 +129,8 @@ for (const name of fs.readdirSync(source).filter(n => /^google[a-f0-9]+\.html$/i
 fs.writeFileSync(path.join(out,'_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 fs.writeFileSync(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\n${domain?'Sitemap: '+domain+'/sitemap.xml\n':''}`);
 if(domain)fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+audit.filter(x=>x.indexable).map(x=>`<url><loc>${domain+x.route}</loc></url>`).join('')+'</urlset>');
+const llms=audit.filter(x=>x.indexable).map(x=>domain+x.route);
+fs.writeFileSync(path.join(out,'llms.txt'),['# khorgosirantruck.com','','Indexable pages on the Khorgos China–Iran TIR corridor site. Duplicate main-site guides are noindex and omitted.','',...llms,''].join('\n'));
 fs.writeFileSync(path.join(out,'404.html'),`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Page not found | khorgosirantruck</title><link rel="stylesheet" href="/assets/site.css"><main class="error-page"><p class="eyebrow">KHORGOSIRANTRUCK / 404</p><h1>This road ends here.</h1><p>The page could not be found.</p><a class="btn" href="/">فارسی</a> <a class="btn" href="/en/">English</a> <a class="btn" href="/zh.html">中文</a></main></html>`);
 fs.writeFileSync(path.join(root,'migration-report.json'),JSON.stringify(audit,null,2));
 console.log(`Built ${audit.length} pages in dist/. Domain: ${domain||'not yet supplied; canonical/sitemap omitted'}`);
