@@ -9,6 +9,10 @@ const out = path.join(root, 'dist');
 const origin = 'https://chinairantrucks.com';
 const domain = (process.env.SITE_ORIGIN || 'https://khorgosirantruck.com').replace(/\/$/, '');
 if (domain && !/^https:\/\/[a-z0-9.-]+$/i.test(domain)) throw new Error('SITE_ORIGIN must be an HTTPS origin');
+const uniqueArticleSlugs = new Set(['cbm-gross-weight', 'yiwu-or-shenzhen', 'turkmenistan-transit']);
+const isIndexableRoute = route =>
+  ['/', '/en/', '/zh.html', '/articles/', '/en/articles/', '/zh/articles/', '/legal/', '/en/legal/', '/zh/legal/', '/privacy/', '/en/privacy/', '/zh/privacy/'].includes(route) ||
+  [...uniqueArticleSlugs].some(slug => route.endsWith(`/articles/${slug}/`));
 const walk = dir => fs.readdirSync(dir, {withFileTypes:true}).flatMap(e => e.isDirectory() ? walk(path.join(dir,e.name)) : [path.join(dir,e.name)]);
 const files = walk(source).filter(p=>p.endsWith('.html') && !/^google[a-f0-9]+\.html$/i.test(path.basename(p)));
 fs.mkdirSync(out,{recursive:true});
@@ -26,6 +30,7 @@ function localURL(value,url){try{const u=new URL(value,url);return u.origin===or
 let audit=[];
 for(const file of files){
   const rel=path.relative(source,file), route=routeOf(rel), url=origin+route;
+  const indexable=isIndexableRoute(route);
   const {document:d}=parseHTML(fs.readFileSync(file,'utf8')
     .replaceAll('sales@chinairantrucks.com','sales@khorgosirantruck.com')
     .replaceAll('8613237401856','8615876207182')
@@ -50,17 +55,21 @@ for(const file of files){
   d.querySelectorAll('script,style,link[rel="stylesheet"],link[rel*="icon"]').forEach(e=>e.remove());
   d.querySelectorAll('noscript').forEach(e=>{if(!e.closest('main'))e.remove();});
   if(main.querySelector('[data-quote-form]'))d.body.appendChild(node(d,'<script defer src="/assets/quote-form.js"></script>'));
-  d.querySelectorAll('link[rel="canonical"],meta[property="og:url"],meta[property="og:image"],meta[property="og:image:width"],meta[property="og:image:height"],meta[name="twitter:image"]').forEach(e=>e.remove());
+  d.querySelectorAll('link[rel="canonical"],meta[name="robots"],meta[property="og:url"],meta[property="og:image"],meta[property="og:image:width"],meta[property="og:image:height"],meta[name="twitter:image"]').forEach(e=>e.remove());
   d.querySelectorAll('meta[property="og:site_name"]').forEach(e=>e.setAttribute('content','khorgosirantruck'));
   d.querySelectorAll('meta[name="twitter:card"]').forEach(e=>e.setAttribute('content','summary'));
-  d.querySelectorAll('link[rel="alternate"]').forEach(e=>{const p=localURL(e.getAttribute('href'),url);if(domain)e.setAttribute('href',domain+p);else e.remove();});
-  if(domain)d.head.appendChild(node(d,`<link rel="canonical" href="${domain+route}">`));
+  d.querySelectorAll('link[rel="alternate"]').forEach(e=>{
+    if(!indexable){e.remove();return;}
+    const p=localURL(e.getAttribute('href'),url);if(domain)e.setAttribute('href',domain+p);else e.remove();
+  });
+  if(domain)d.head.appendChild(node(d,`<link rel="canonical" href="${indexable?domain+route:origin+route}">`));
+  if(!indexable)d.head.appendChild(node(d,'<meta name="robots" content="noindex,follow">'));
   d.title=d.title.replaceAll('chinairantrucks','khorgosirantruck');if(!d.title.includes('khorgosirantruck'))d.title+=' | khorgosirantruck';
   d.querySelectorAll('meta[content]').forEach(e=>e.setAttribute('content',e.getAttribute('content').replace(/(?<!@)chinairantrucks/g,'khorgosirantruck')));
   d.head.appendChild(node(d,'<link rel="stylesheet" href="/assets/site.css">'));
   d.head.appendChild(node(d,'<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">'));
   for(const e of d.querySelectorAll('[href],[src],[srcset]')){
-    for(const attr of ['href','src'])if(e.hasAttribute(attr))e.setAttribute(attr,localURL(e.getAttribute(attr),url));
+    for(const attr of ['href','src'])if(e.hasAttribute(attr)&&!(attr==='href'&&e.matches('link[rel="canonical"]')))e.setAttribute(attr,localURL(e.getAttribute(attr),url));
     if(e.hasAttribute('srcset'))e.setAttribute('srcset',e.getAttribute('srcset').split(',').map(s=>{const [u,...rest]=s.trim().split(/\s+/);return [localURL(u,url),...rest].join(' ');}).join(', '));
   }
   const header=node(d,`<header class="site-header"><div class="header-inner"><a class="home-link" href="${c.home}" aria-label="khorgosirantruck — ${c.back}">${brand}</a><nav class="desktop-nav" aria-label="${c.menu}"><a href="${c.home}#lanes">${c.route}</a><a href="${c.home}#cargo">${c.cargo}</a><a href="${c.articles}">${c.index}</a></nav><div class="languages" aria-label="Language">${langs}</div><a class="header-quote" href="${c.home}#quote">${c.contact} <span aria-hidden="true">↗</span></a><details class="mobile-menu"><summary>${c.menu}</summary><nav><a href="${c.home}#lanes">${c.route}</a><a href="${c.home}#cargo">${c.cargo}</a><a href="${c.articles}">${c.index}</a><a href="${c.home}#quote">${c.contact}</a></nav></details></div></header>`);
@@ -90,7 +99,12 @@ for(const file of files){
     d.body.classList.add('reading-page');
     const isIndex=/\/articles\/$/.test(route);d.body.classList.add(isIndex?'journal-index':'article-page');
     const h1=main.querySelector('h1');if(h1)h1.before(node(d,`<p class="breadcrumbs"><a href="${c.home}">${c.back}</a><span>/</span><a href="${c.articles}">${c.index}</a></p>`));
-    if(isIndex){const rows=[...main.querySelectorAll('.way-row')];if(rows.length){const grid=node(d,'<div class="waybill"></div>');rows[0].before(grid);rows.forEach(r=>grid.append(r));}}
+    if(isIndex){
+      const rows=[...main.querySelectorAll('.way-row')];
+      const kept=rows.filter(row=>[row,...row.querySelectorAll('a[href]')].filter(a=>a.matches('a[href]')).some(a=>[...uniqueArticleSlugs].some(slug=>a.getAttribute('href').includes(`/articles/${slug}/`))));
+      rows.filter(row=>!kept.includes(row)).forEach(row=>row.remove());
+      if(kept.length){const grid=node(d,'<div class="waybill"></div>');kept[0].before(grid);kept.forEach(r=>grid.append(r));}
+    }
     if(!isIndex){
       const headings=[...main.querySelectorAll('h2')];
       if(headings.length){const toc=node(d,`<details class="contents"><summary>${c.toc}</summary><ol></ol></details>`);headings.forEach((h,i)=>{if(!h.id)h.id='section-'+(i+1);const li=d.createElement('li'),a=d.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;li.append(a);toc.querySelector('ol').append(li);});h1?.after(toc);}
@@ -107,14 +121,16 @@ for(const file of files){
   for(const img of main.querySelectorAll('img')){if(!img.hasAttribute('loading')&&!img.hasAttribute('fetchpriority'))img.loading='lazy';}
   redesign(d,{lang,isHome,root,c,domain,route});
   const dest=path.join(out,rel);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,'<!DOCTYPE html>\n'+d.documentElement.outerHTML);
-  audit.push({route,lang,sourceChars:baseline.length});
+  audit.push({route,lang,indexable,sourceChars:baseline.length});
 }
 for (const name of fs.readdirSync(source).filter(n => /^google[a-f0-9]+\.html$/i.test(n))) {
   fs.copyFileSync(path.join(source, name), path.join(out, name));
 }
 fs.writeFileSync(path.join(out,'_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 fs.writeFileSync(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\n${domain?'Sitemap: '+domain+'/sitemap.xml\n':''}`);
-if(domain)fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+audit.map(x=>`<url><loc>${domain+x.route}</loc></url>`).join('')+'</urlset>');
-fs.writeFileSync(path.join(out,'404.html'),`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Page not found | khorgosirantruck</title><link rel="stylesheet" href="/assets/site.css"><main class="error-page"><p class="eyebrow">KHORGOSIRANTRUCK / 404</p><h1>This road ends here.</h1><p>The page could not be found.</p><a class="btn" href="/">فارسی</a> <a class="btn" href="/en/">English</a> <a class="btn" href="/zh.html">中文</a></main></html>`);
+if(domain)fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+audit.filter(x=>x.indexable).map(x=>`<url><loc>${domain+x.route}</loc></url>`).join('')+'</urlset>');
+const llms=audit.filter(x=>x.indexable).map(x=>domain+x.route);
+fs.writeFileSync(path.join(out,'llms.txt'),['# khorgosirantruck.com','','Indexable pages on the Khorgos China–Iran TIR corridor site. Duplicate main-site guides are noindex and omitted.','',...llms,''].join('\n'));
+fs.writeFileSync(path.join(out,'404.html'),`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Page not found | khorgosirantruck</title><link rel="stylesheet" href="/assets/site.css"><main class="error-page"><p class="eyebrow">KHORGOSIRANTRUCK / 404</p><h1>This road ends here.</h1><p>The page could not be found.</p><a class="btn" href="/">فارسی</a> <a class="btn" href="/en/">English</a> <a class="btn" href="/zh.html">中文</a></main></html>`);
 fs.writeFileSync(path.join(root,'migration-report.json'),JSON.stringify(audit,null,2));
 console.log(`Built ${audit.length} pages in dist/. Domain: ${domain||'not yet supplied; canonical/sitemap omitted'}`);
