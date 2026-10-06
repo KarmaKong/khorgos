@@ -33,7 +33,7 @@
     "route": "/articles/cbm-gross-weight/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2111
+    "sourceChars": 2137
   },
   {
     "route": "/articles/central-asia-transit/",
@@ -105,7 +105,7 @@
     "route": "/articles/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 1967
+    "sourceChars": 2049
   },
   {
     "route": "/articles/iran-customs-agent/",
@@ -166,6 +166,12 @@
     "lang": "fa",
     "indexable": false,
     "sourceChars": 4878
+  },
+  {
+    "route": "/articles/turkmenistan-transit/",
+    "lang": "fa",
+    "indexable": true,
+    "sourceChars": 7404
   },
   {
     "route": "/articles/uzbekistan/",
@@ -243,7 +249,7 @@
     "route": "/en/articles/cbm-gross-weight/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2466
+    "sourceChars": 2496
   },
   {
     "route": "/en/articles/central-asia-transit/",
@@ -315,7 +321,7 @@
     "route": "/en/articles/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2055
+    "sourceChars": 2149
   },
   {
     "route": "/en/articles/iran-customs-agent/",
@@ -376,6 +382,12 @@
     "lang": "en",
     "indexable": false,
     "sourceChars": 5825
+  },
+  {
+    "route": "/en/articles/turkmenistan-transit/",
+    "lang": "en",
+    "indexable": true,
+    "sourceChars": 9008
   },
   {
     "route": "/en/articles/uzbekistan/",
@@ -489,7 +501,7 @@
     "route": "/zh/articles/cbm-gross-weight/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 787
+    "sourceChars": 800
   },
   {
     "route": "/zh/articles/central-asia-transit/",
@@ -561,7 +573,7 @@
     "route": "/zh/articles/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 935
+    "sourceChars": 966
   },
   {
     "route": "/zh/articles/iran-customs-agent/",
@@ -622,6 +634,12 @@
     "lang": "zh",
     "indexable": false,
     "sourceChars": 1881
+  },
+  {
+    "route": "/zh/articles/turkmenistan-transit/",
+    "lang": "zh",
+    "indexable": true,
+    "sourceChars": 2634
   },
   {
     "route": "/zh/articles/uzbekistan/",

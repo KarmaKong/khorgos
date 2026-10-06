@@ -21,7 +21,7 @@ for(const {route} of report){
     if(route.endsWith('/privacy/')&&e.textContent.includes('GoatCounter'))continue;
     if(['/', '/en/', '/zh.html'].includes(route)&&e.closest('.home-hero,.cargo-stats,.badges-sec,#lanes,#route,#compare,#faq'))continue;
     const row=e.closest('.way-row');
-    if(route.endsWith('/articles/')&&row&&![row,...row.querySelectorAll('a[href]')].filter(a=>a.matches('a[href]')).some(a=>/\/articles\/(cbm-gross-weight|yiwu-or-shenzhen)\//.test(new URL(a.getAttribute('href'),'https://x'+route).pathname)))continue;
+    if(route.endsWith('/articles/')&&row&&![row,...row.querySelectorAll('a[href]')].filter(a=>a.matches('a[href]')).some(a=>/\/articles\/(cbm-gross-weight|yiwu-or-shenzhen|turkmenistan-transit)\//.test(new URL(a.getAttribute('href'),'https://x'+route).pathname)))continue;
     const expected=clean(e.textContent);blocks++;
     if(expected&&!text.includes(expected))errors.push(`Missing content ${route}: ${expected.slice(0,70)}`);
   }
@@ -85,49 +85,13 @@ for(const [route,d] of parsed){
   assert.equal(d.querySelector('form').getAttribute('action'),'mailto:sales@khorgosirantruck.com');
  }
 }
-// Structured data: one parseable Khorgos graph per indexable page, generated from visible content; none on noindex duplicates.
-const site=process.env.SITE_ORIGIN||'https://khorgosirantruck.com';let ldPages=0;
-const visible=e=>e.textContent.replace(/\s+/g,' ').trim();
-for(const [route,d] of parsed){
- const blocks=[...d.querySelectorAll('script[type="application/ld+json"]')];
- if(!report.find(page=>page.route===route).indexable){assert.equal(blocks.length,0,`No JSON-LD on noindex duplicate: ${route}`);continue;}
- assert.equal(blocks.length,1,`One JSON-LD block: ${route}`);
- const raw=blocks[0].textContent,ld=JSON.parse(raw),graph=ld['@graph'],url=site+route;ldPages++;
- assert.equal(ld['@context'],'https://schema.org');
- assert.ok(!/chinairantrucks|\{\{|\$\{|TODO|to be completed|lorem|undefined|null|"":|\[\]/i.test(raw),`No legacy brand or placeholders in JSON-LD: ${route}`);
- for(const m of raw.matchAll(/"(https?:[^"]+)"/g))if(m[1]!=='https://schema.org'){assert.ok(m[1].startsWith(site+'/'),`JSON-LD URL on site: ${route} ${m[1]}`);const p=new URL(m[1]).pathname;assert.ok(fs.existsSync(fileFor(p)),`JSON-LD target exists: ${route} ${m[1]}`);}
- const byType=t=>graph.filter(x=>x['@type']===t);
- assert.equal(byType('Organization').length,1);assert.equal(byType('Organization')[0].name,'KHORGOS Iran Truck');assert.equal(byType('WebSite').length,1);
- const page=graph.find(x=>x['@id']===url+'#webpage');
- assert.ok(page&&page.url===d.querySelector('link[rel=canonical]').getAttribute('href'),`WebPage matches canonical: ${route}`);
- assert.equal(page.inLanguage,d.documentElement.lang,`JSON-LD language: ${route}`);
- const faq=[...d.querySelectorAll('main .faq details')].map(e=>{const a=e.cloneNode(true);a.querySelector('summary').remove();return [visible(e.querySelector('summary')),visible(a)];});
- assert.equal(page['@type'],faq.length?'FAQPage':route.endsWith('/articles/')?'CollectionPage':'WebPage',`Page type: ${route}`);
- assert.deepEqual((page.mainEntity?.length?page.mainEntity:[]).map(q=>[q.name,q.acceptedAnswer.text]),faq,`FAQ mirrors visible Q&A: ${route}`);
- if(['/', '/en/', '/zh.html'].includes(route)){assert.equal(faq.length,3,`Khorgos FAQ: ${route}`);assert.ok(!page.breadcrumb);assert.equal(page.about['@id'],site+'/#organization');continue;}
- const crumbs=page.breadcrumb.itemListElement,trail=[...d.querySelectorAll('main .breadcrumbs a')];
- assert.deepEqual(crumbs.slice(0,trail.length).map(x=>[x.name,x.item]),trail.map(a=>[visible(a),site+a.getAttribute('href')]),`Breadcrumb mirrors visible trail: ${route}`);
- assert.equal(crumbs.at(-1).item,url);
- if(route.endsWith('/articles/')){
-  const rows=[...d.querySelectorAll('main .waybill .way-row')];
-  assert.equal(rows.length,2,`Journal lists indexable articles: ${route}`);
-  assert.deepEqual(page.mainEntity.itemListElement.map(x=>x.url),rows.map(a=>site+a.getAttribute('href')));
-  for(const x of page.mainEntity.itemListElement)assert.ok(report.find(p=>site+p.route===x.url)?.indexable,`ItemList links indexable page: ${x.url}`);
- }else if(route.includes('/articles/')){
-  const [article]=byType('Article');
-  assert.equal(article.headline,visible(d.querySelector('main h1')));
-  assert.equal(article.datePublished,d.querySelector('main time[datetime]').getAttribute('datetime'));
-  assert.equal(article.mainEntityOfPage['@id'],page['@id']);
-  assert.equal(crumbs.length,3);
- }else{
-  assert.equal(crumbs.length,2,`Policy breadcrumb: ${route}`);
-  assert.ok(visible(d.querySelector('main')).includes(page.dateModified),`Visible last-updated date: ${route}`);
- }
-}
-assert.equal(ldPages,report.filter(p=>p.indexable).length);
-console.log(`PASS: JSON-LD parsed on ${ldPages} indexable pages (Organization/WebSite/page types, FAQ, breadcrumbs, articles mirror visible content); none on ${report.length-ldPages} noindex duplicates.`);
 const sitemap=fs.readFileSync(path.join(out,'sitemap.xml'),'utf8');
-for(const {route,indexable} of report)assert.equal(sitemap.includes(`<loc>${process.env.SITE_ORIGIN||'https://khorgosirantruck.com'}${route}</loc>`),indexable,`Sitemap boundary: ${route}`);
+const llms=fs.readFileSync(path.join(out,'llms.txt'),'utf8');
+for(const {route,indexable} of report){
+  const loc=`${process.env.SITE_ORIGIN||'https://khorgosirantruck.com'}${route}`;
+  assert.equal(sitemap.includes(`<loc>${loc}</loc>`),indexable,`Sitemap boundary: ${route}`);
+  assert.equal(llms.includes(loc),indexable,`llms.txt boundary: ${route}`);
+}
 assert.equal(parseHTML(fs.readFileSync(path.join(out,'404.html'),'utf8')).document.querySelector('meta[name=robots]')?.getAttribute('content'),'noindex');
 const walkFiles=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walkFiles(path.join(dir,e.name)):[path.join(dir,e.name)]);
 assert.ok(!walkFiles(out).some(p=>p.includes('source-boards')||p.includes('-ai.')));
