@@ -84,6 +84,12 @@
     "sourceChars": 2318
   },
   {
+    "route": "/articles/from-khorgos/",
+    "lang": "fa",
+    "indexable": true,
+    "sourceChars": 1698
+  },
+  {
     "route": "/articles/ftl-vs-ltl/",
     "lang": "fa",
     "indexable": false,
@@ -105,7 +111,7 @@
     "route": "/articles/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2049
+    "sourceChars": 2100
   },
   {
     "route": "/articles/iran-customs-agent/",
@@ -171,7 +177,7 @@
     "route": "/articles/turkmenistan-transit/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 7404
+    "sourceChars": 7421
   },
   {
     "route": "/articles/uzbekistan/",
@@ -213,7 +219,7 @@
     "route": "/articles/yiwu-or-shenzhen/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 3205
+    "sourceChars": 3222
   },
   {
     "route": "/en/articles/22-days/",
@@ -300,6 +306,12 @@
     "sourceChars": 2648
   },
   {
+    "route": "/en/articles/from-khorgos/",
+    "lang": "en",
+    "indexable": true,
+    "sourceChars": 1765
+  },
+  {
     "route": "/en/articles/ftl-vs-ltl/",
     "lang": "en",
     "indexable": false,
@@ -321,7 +333,7 @@
     "route": "/en/articles/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2149
+    "sourceChars": 2221
   },
   {
     "route": "/en/articles/iran-customs-agent/",
@@ -387,7 +399,7 @@
     "route": "/en/articles/turkmenistan-transit/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 9008
+    "sourceChars": 9030
   },
   {
     "route": "/en/articles/uzbekistan/",
@@ -429,7 +441,7 @@
     "route": "/en/articles/yiwu-or-shenzhen/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 3652
+    "sourceChars": 3674
   },
   {
     "route": "/en/",
@@ -552,6 +564,12 @@
     "sourceChars": 836
   },
   {
+    "route": "/zh/articles/from-khorgos/",
+    "lang": "zh",
+    "indexable": true,
+    "sourceChars": 651
+  },
+  {
     "route": "/zh/articles/ftl-vs-ltl/",
     "lang": "zh",
     "indexable": false,
@@ -573,7 +591,7 @@
     "route": "/zh/articles/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 966
+    "sourceChars": 991
   },
   {
     "route": "/zh/articles/iran-customs-agent/",
@@ -639,7 +657,7 @@
     "route": "/zh/articles/turkmenistan-transit/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 2634
+    "sourceChars": 2644
   },
   {
     "route": "/zh/articles/uzbekistan/",
@@ -681,7 +699,7 @@
     "route": "/zh/articles/yiwu-or-shenzhen/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 1081
+    "sourceChars": 1091
   },
   {
     "route": "/zh/legal/",

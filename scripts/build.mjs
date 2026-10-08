@@ -9,7 +9,7 @@ const out = path.join(root, 'dist');
 const origin = 'https://chinairantrucks.com';
 const domain = (process.env.SITE_ORIGIN || 'https://khorgosirantruck.com').replace(/\/$/, '');
 if (domain && !/^https:\/\/[a-z0-9.-]+$/i.test(domain)) throw new Error('SITE_ORIGIN must be an HTTPS origin');
-const uniqueArticleSlugs = new Set(['cbm-gross-weight', 'yiwu-or-shenzhen', 'turkmenistan-transit']);
+const uniqueArticleSlugs = new Set(['cbm-gross-weight', 'from-khorgos', 'yiwu-or-shenzhen', 'turkmenistan-transit']);
 const isIndexableRoute = route =>
   ['/', '/en/', '/zh.html', '/articles/', '/en/articles/', '/zh/articles/', '/legal/', '/en/legal/', '/zh/legal/', '/privacy/', '/en/privacy/', '/zh/privacy/'].includes(route) ||
   [...uniqueArticleSlugs].some(slug => route.endsWith(`/articles/${slug}/`));
