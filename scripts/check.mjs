@@ -110,7 +110,7 @@ for(const [route,d] of parsed){
  assert.equal(crumbs.at(-1).item,url);
  if(route.endsWith('/articles/')){
   const rows=[...d.querySelectorAll('main .waybill .way-row')];
-  assert.equal(rows.length,3,`Journal lists indexable articles: ${route}`);
+  assert.equal(rows.length,4,`Journal lists indexable articles: ${route}`);
   assert.deepEqual(page.mainEntity.itemListElement.map(x=>x.url),rows.map(a=>site+a.getAttribute('href')));
   for(const x of page.mainEntity.itemListElement)assert.ok(report.find(p=>site+p.route===x.url)?.indexable,`ItemList links indexable page: ${x.url}`);
  }else if(route.includes('/articles/')){
