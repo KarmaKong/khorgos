@@ -70,7 +70,7 @@ for(const file of files){
   if(!main){
     if(rel!=='zh/index.html')throw new Error(`No main: ${rel}`);
     const dest=path.join(out,rel);fs.mkdirSync(path.dirname(dest),{recursive:true});
-    fs.writeFileSync(dest,'<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="refresh" content="0;url=/zh.html"><meta name="robots" content="noindex,follow"><title>khorgosirantruck 中文</title><a href="/zh.html">进入中文站点</a></html>');continue;
+    fs.writeFileSync(dest,`<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="refresh" content="0;url=/zh.html"><link rel="canonical" href="${domain}/zh.html"><title>khorgosirantruck 中文</title><a href="/zh.html">进入中文站点</a></html>`);continue;
   }
   const lang=d.documentElement.lang.startsWith('zh')?'zh':d.documentElement.lang.startsWith('en')?'en':'fa';
   const c=config[lang], isHome=!!d.querySelector('.home-hero');
