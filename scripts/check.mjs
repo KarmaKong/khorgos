@@ -44,7 +44,16 @@ for(const {route} of report){
 }
 for(const m of fs.readFileSync(path.join(out,'assets/site.css'),'utf8').matchAll(/url\(['"]?([^'"\)]+)['"]?\)/g))if(!fs.existsSync(fileFor(m[1])))errors.push(`Missing CSS asset ${m[1]}`);
 if(manifest.errors.length)errors.push('Source snapshot has download failures');
-for(const url of manifest.pages){const p=new URL(url).pathname;if(!fs.existsSync(fileFor(p)))errors.push(`Unmigrated source page: ${p}`);}
+const uniqueArticleSlugs=new Set(['cbm-gross-weight','from-khorgos','yiwu-or-shenzhen','turkmenistan-transit']);
+const keptSource=new Set(['/','/en/','/zh.html','/zh/','/articles/','/en/articles/','/zh/articles/','/legal/','/en/legal/','/zh/legal/','/privacy/','/en/privacy/','/zh/privacy/',...[...uniqueArticleSlugs].flatMap(s=>[`/articles/${s}/`,`/en/articles/${s}/`,`/zh/articles/${s}/`])]);
+for(const url of manifest.pages){
+  const p=new URL(url).pathname;
+  if(keptSource.has(p)){
+    if(!fs.existsSync(fileFor(p)))errors.push(`Unmigrated source page: ${p}`);
+  }else if(p.includes('/articles/') && fs.existsSync(fileFor(p))){
+    errors.push(`Duplicate main-site article should 404: ${p}`);
+  }
+}
 if(errors.length){console.error(errors.join('\n'));process.exit(1);}
 // Exercise the preserved mailto builder without opening a mail app or sending data.
 const fields=new Map(Object.entries({hub:'Yiwu (Suxi)',dest:'Tehran West Customs (Gomrok Gharb)',hs:'850440',kg:'1000',cbm:'5',notes:'中文 & فارسی',contact:'',lithium:'yes'}));

@@ -15,6 +15,7 @@ const isIndexableRoute = route =>
   [...uniqueArticleSlugs].some(slug => route.endsWith(`/articles/${slug}/`));
 const walk = dir => fs.readdirSync(dir, {withFileTypes:true}).flatMap(e => e.isDirectory() ? walk(path.join(dir,e.name)) : [path.join(dir,e.name)]);
 const files = walk(source).filter(p=>p.endsWith('.html') && !/^google[a-f0-9]+\.html$/i.test(path.basename(p)));
+fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
 for(const dir of ['img','fonts']) if(fs.existsSync(path.join(source,dir))) fs.cpSync(path.join(source,dir),path.join(out,dir),{recursive:true});
 fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true,filter:p=>!p.endsWith('.png')});
@@ -62,6 +63,7 @@ let audit=[];
 for(const file of files){
   const rel=path.relative(source,file), route=routeOf(rel), url=origin+route;
   const indexable=isIndexableRoute(route);
+  if(!indexable && rel!=='zh/index.html') continue;
   const {document:d}=parseHTML(fs.readFileSync(file,'utf8')
     .replaceAll('sales@chinairantrucks.com','sales@khorgosirantruck.com')
     .replaceAll('8613237401856','8615876207182')
