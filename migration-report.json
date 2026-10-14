@@ -15,19 +15,19 @@
     "route": "/articles/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2100
+    "sourceChars": 2084
   },
   {
     "route": "/articles/turkmenistan-transit/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 7314
+    "sourceChars": 7303
   },
   {
     "route": "/articles/yiwu-or-shenzhen/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 3189
+    "sourceChars": 3178
   },
   {
     "route": "/en/articles/cbm-gross-weight/",
@@ -45,102 +45,102 @@
     "route": "/en/articles/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2221
+    "sourceChars": 2191
   },
   {
     "route": "/en/articles/turkmenistan-transit/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 8909
+    "sourceChars": 8897
   },
   {
     "route": "/en/articles/yiwu-or-shenzhen/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 3624
+    "sourceChars": 3612
   },
   {
     "route": "/en/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 8902
+    "sourceChars": 8394
   },
   {
     "route": "/en/legal/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 1879
+    "sourceChars": 1904
   },
   {
     "route": "/en/privacy/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2128
+    "sourceChars": 2131
   },
   {
     "route": "/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 7725
+    "sourceChars": 7279
   },
   {
     "route": "/legal/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 1585
+    "sourceChars": 1598
   },
   {
     "route": "/privacy/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2049
+    "sourceChars": 2043
   },
   {
     "route": "/zh/articles/cbm-gross-weight/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 786
+    "sourceChars": 790
   },
   {
     "route": "/zh/articles/from-khorgos/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 653
+    "sourceChars": 657
   },
   {
     "route": "/zh/articles/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 991
+    "sourceChars": 973
   },
   {
     "route": "/zh/articles/turkmenistan-transit/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 2602
+    "sourceChars": 2598
   },
   {
     "route": "/zh/articles/yiwu-or-shenzhen/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 1065
+    "sourceChars": 1061
   },
   {
     "route": "/zh/legal/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 561
+    "sourceChars": 581
   },
   {
     "route": "/zh/privacy/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 795
+    "sourceChars": 797
   },
   {
     "route": "/zh.html",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 3394
+    "sourceChars": 3173
   }
 ]

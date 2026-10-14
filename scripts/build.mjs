@@ -20,9 +20,9 @@ fs.mkdirSync(out,{recursive:true});
 for(const dir of ['img','fonts']) if(fs.existsSync(path.join(source,dir))) fs.cpSync(path.join(source,dir),path.join(out,dir),{recursive:true});
 fs.cpSync(path.join(root,'assets'),path.join(out,'assets'),{recursive:true,filter:p=>!p.endsWith('.png')});
 const config = {
-  fa:{home:'/',articles:'/articles/',route:'مسیر حمل',cargo:'خدمات',faq:'پرسش‌ها',contact:'استعلام قیمت',menu:'فهرست',back:'صفحه اصلی',index:'راهنمای حمل',title:'چین به ایران، از مسیر زمینی.',toc:'در این مقاله',skip:'پرش به محتوا'},
-  en:{home:'/en/',articles:'/en/articles/',route:'Routes',cargo:'Cargo',faq:'FAQ',contact:'Get a quote',menu:'Menu',back:'Home',index:'Freight journal',title:'China to Iran. By road.',toc:'On this page',skip:'Skip to content'},
-  zh:{home:'/zh.html',articles:'/zh/articles/',route:'运输路线',cargo:'承运货物',faq:'常见问题',contact:'获取报价',menu:'菜单',back:'首页',index:'运输指南',title:'从中国出发，沿公路抵达伊朗。',toc:'文章目录',skip:'跳到正文'}
+  fa:{home:'/',articles:'/articles/',route:'مسیر حمل',cargo:'خدمات',faq:'پرسش‌ها',contact:'تماس با دیسپاچ مرزی',menu:'فهرست',back:'صفحه اصلی',index:'راهنمای حمل',title:'چین به ایران، از مسیر زمینی.',toc:'در این مقاله',skip:'پرش به محتوا'},
+  en:{home:'/en/',articles:'/en/articles/',route:'Routes',cargo:'Cargo',faq:'FAQ',contact:'Contact Border Dispatch',menu:'Menu',back:'Home',index:'Freight journal',title:'China to Iran. By road.',toc:'On this page',skip:'Skip to content'},
+  zh:{home:'/zh.html',articles:'/zh/articles/',route:'运输路线',cargo:'承运货物',faq:'常见问题',contact:'联系口岸调度查车',menu:'菜单',back:'首页',index:'运输指南',title:'从中国出发，沿公路抵达伊朗。',toc:'文章目录',skip:'跳到正文'}
 };
 const brand = '<span class="brand" dir="ltr"><img src="/assets/favicon.svg" width="38" height="38" alt="">khorgosirantruck</span>';
 function node(doc, html){const t=doc.createElement('template');t.innerHTML=html;return t.content.firstElementChild;}
