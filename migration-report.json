@@ -15,7 +15,13 @@
     "route": "/articles/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2084
+    "sourceChars": 2140
+  },
+  {
+    "route": "/articles/khorgos-no-kyrgyz-tax/",
+    "lang": "fa",
+    "indexable": true,
+    "sourceChars": 1495
   },
   {
     "route": "/articles/turkmenistan-transit/",
@@ -45,7 +51,13 @@
     "route": "/en/articles/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2191
+    "sourceChars": 2262
+  },
+  {
+    "route": "/en/articles/khorgos-no-kyrgyz-tax/",
+    "lang": "en",
+    "indexable": true,
+    "sourceChars": 1682
   },
   {
     "route": "/en/articles/turkmenistan-transit/",
@@ -111,7 +123,13 @@
     "route": "/zh/articles/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 973
+    "sourceChars": 1002
+  },
+  {
+    "route": "/zh/articles/khorgos-no-kyrgyz-tax/",
+    "lang": "zh",
+    "indexable": true,
+    "sourceChars": 642
   },
   {
     "route": "/zh/articles/turkmenistan-transit/",
