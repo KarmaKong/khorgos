@@ -27,7 +27,7 @@ const config = {
 const brand = '<span class="brand" dir="ltr"><img src="/assets/favicon.svg" width="38" height="38" alt="">khorgosirantruck</span>';
 function node(doc, html){const t=doc.createElement('template');t.innerHTML=html;return t.content.firstElementChild;}
 function routeOf(rel){return '/'+rel.replace(/index\.html$/,'');}
-function localURL(value,url){try{const u=new URL(value,url);return u.origin===origin?u.pathname+u.search+u.hash:value;}catch{return value;}}
+function localURL(value,url){try{const u=new URL(value,url);return (u.origin===origin||u.origin===domain)?u.pathname+u.search+u.hash:value;}catch{return value;}}
 // JSON-LD is derived from the rendered page only: visible headings, FAQ, dates, breadcrumbs and article list.
 // No legal entity, address, prices, transit times or capabilities are declared beyond what the page shows.
 function structuredData(d,{lang,route,isHome}){
@@ -104,7 +104,7 @@ for(const file of files){
   d.head.appendChild(node(d,'<link rel="stylesheet" href="/assets/site.css">'));
   d.head.appendChild(node(d,'<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">'));
   for(const e of d.querySelectorAll('[href],[src],[srcset]')){
-    for(const attr of ['href','src'])if(e.hasAttribute(attr)&&!(attr==='href'&&e.matches('link[rel="canonical"]')))e.setAttribute(attr,localURL(e.getAttribute(attr),url));
+    for(const attr of ['href','src'])if(e.hasAttribute(attr)&&!(attr==='href'&&e.matches('link[rel="canonical"],link[rel="alternate"]')))e.setAttribute(attr,localURL(e.getAttribute(attr),url));
     if(e.hasAttribute('srcset'))e.setAttribute('srcset',e.getAttribute('srcset').split(',').map(s=>{const [u,...rest]=s.trim().split(/\s+/);return [localURL(u,url),...rest].join(' ');}).join(', '));
   }
   const header=node(d,`<header class="site-header"><div class="header-inner"><a class="home-link" href="${c.home}" aria-label="khorgosirantruck — ${c.back}">${brand}</a><nav class="desktop-nav" aria-label="${c.menu}"><a href="${c.home}#lanes">${c.route}</a><a href="${c.home}#cargo">${c.cargo}</a><a href="${c.articles}">${c.index}</a></nav><div class="languages" aria-label="Language">${langs}</div><a class="header-quote" href="${c.home}#quote">${c.contact} <span aria-hidden="true">↗</span></a><details class="mobile-menu"><summary>${c.menu}</summary><nav><a href="${c.home}#lanes">${c.route}</a><a href="${c.home}#cargo">${c.cargo}</a><a href="${c.articles}">${c.index}</a><a href="${c.home}#quote">${c.contact}</a></nav></details></div></header>`);
