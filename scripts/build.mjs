@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {execSync} from 'node:child_process';
 import path from 'node:path';
 import { parseHTML } from 'linkedom';
 import { redesign } from './redesign.mjs';
@@ -59,6 +60,8 @@ function structuredData(d,{lang,route,isHome}){
   script.textContent=JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c');
   return script;
 }
+const gitDate=rel=>{try{const out=execSync(`git log -1 --format=%cs -- ${JSON.stringify(rel)}`,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();if(out)return out;}catch{}try{return fs.statSync(path.join(root,rel)).mtime.toISOString().slice(0,10);}catch{return '';}};
+const srcForRoute=route=>{let p=route==='/'?'index.html':route.replace(/^\//,'');if(p.endsWith('/'))p+='index.html';return path.join('source',p);};
 let audit=[];
 for(const file of files){
   const rel=path.relative(source,file), route=routeOf(rel), url=origin+route;
@@ -165,7 +168,7 @@ for (const name of fs.readdirSync(source).filter(n => /^google[a-f0-9]+\.html$/i
 }
 fs.writeFileSync(path.join(out,'_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 fs.writeFileSync(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\n${domain?'Sitemap: '+domain+'/sitemap.xml\n':''}`);
-if(domain)fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+audit.filter(x=>x.indexable).map(x=>`<url><loc>${domain+x.route}</loc></url>`).join('')+'</urlset>');
+if(domain)fs.writeFileSync(path.join(out,'sitemap.xml'),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+audit.filter(x=>x.indexable).map(x=>{const d=gitDate(srcForRoute(x.route));return `<url><loc>${domain+x.route}</loc>${d?`<lastmod>${d}</lastmod>`:''}</url>`;}).join('')+'</urlset>');
 const llms=audit.filter(x=>x.indexable).map(x=>domain+x.route);
 fs.writeFileSync(path.join(out,'llms.txt'),['# khorgosirantruck.com','','Indexable pages on the Khorgos China–Iran TIR corridor site. Duplicate main-site guides are noindex and omitted.','',...llms,''].join('\n'));
 fs.writeFileSync(path.join(out,'404.html'),`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Page not found | khorgosirantruck</title><link rel="stylesheet" href="/assets/site.css"><main class="error-page"><p class="eyebrow">KHORGOSIRANTRUCK / 404</p><h1>This road ends here.</h1><p>The page could not be found.</p><a class="btn" href="/">فارسی</a> <a class="btn" href="/en/">English</a> <a class="btn" href="/zh.html">中文</a></main></html>`);
