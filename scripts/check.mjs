@@ -44,7 +44,7 @@ for(const {route} of report){
 }
 for(const m of fs.readFileSync(path.join(out,'assets/site.css'),'utf8').matchAll(/url\(['"]?([^'"\)]+)['"]?\)/g))if(!fs.existsSync(fileFor(m[1])))errors.push(`Missing CSS asset ${m[1]}`);
 if(manifest.errors.length)errors.push('Source snapshot has download failures');
-const uniqueArticleSlugs=new Set(['cbm-gross-weight','from-khorgos','yiwu-or-shenzhen','turkmenistan-transit','khorgos-no-kyrgyz-tax','khorgos-quote-check']);
+const uniqueArticleSlugs=new Set(['cbm-gross-weight','from-khorgos','yiwu-or-shenzhen','turkmenistan-transit','khorgos-no-kyrgyz-tax','khorgos-quote-check','loading-and-securing']);
 const keptSource=new Set(['/','/en/','/zh.html','/zh/','/articles/','/en/articles/','/zh/articles/','/legal/','/en/legal/','/zh/legal/','/privacy/','/en/privacy/','/zh/privacy/',...[...uniqueArticleSlugs].flatMap(s=>[`/articles/${s}/`,`/en/articles/${s}/`,`/zh/articles/${s}/`])]);
 for(const url of manifest.pages){
   const p=new URL(url).pathname;
