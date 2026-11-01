@@ -15,7 +15,13 @@
     "route": "/articles/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2271
+    "sourceChars": 2326
+  },
+  {
+    "route": "/articles/khorgos-export-customs/",
+    "lang": "fa",
+    "indexable": true,
+    "sourceChars": 5082
   },
   {
     "route": "/articles/khorgos-no-kyrgyz-tax/",
@@ -63,7 +69,13 @@
     "route": "/en/articles/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2397
+    "sourceChars": 2465
+  },
+  {
+    "route": "/en/articles/khorgos-export-customs/",
+    "lang": "en",
+    "indexable": true,
+    "sourceChars": 6190
   },
   {
     "route": "/en/articles/khorgos-no-kyrgyz-tax/",
@@ -147,7 +159,13 @@
     "route": "/zh/articles/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 1047
+    "sourceChars": 1070
+  },
+  {
+    "route": "/zh/articles/khorgos-export-customs/",
+    "lang": "zh",
+    "indexable": true,
+    "sourceChars": 1789
   },
   {
     "route": "/zh/articles/khorgos-no-kyrgyz-tax/",
