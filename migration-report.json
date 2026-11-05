@@ -51,7 +51,7 @@
     "route": "/articles/yiwu-or-shenzhen/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 3178
+    "sourceChars": 3241
   },
   {
     "route": "/en/articles/cbm-gross-weight/",
@@ -105,7 +105,7 @@
     "route": "/en/articles/yiwu-or-shenzhen/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 3619
+    "sourceChars": 3636
   },
   {
     "route": "/en/",
@@ -195,7 +195,7 @@
     "route": "/zh/articles/yiwu-or-shenzhen/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 1061
+    "sourceChars": 1066
   },
   {
     "route": "/zh/legal/",
