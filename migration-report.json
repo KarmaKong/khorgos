@@ -15,7 +15,7 @@
     "route": "/articles/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2326
+    "sourceChars": 2369
   },
   {
     "route": "/articles/khorgos-export-customs/",
@@ -40,6 +40,12 @@
     "lang": "fa",
     "indexable": true,
     "sourceChars": 6051
+  },
+  {
+    "route": "/articles/sarakhs-entry-not-destination/",
+    "lang": "fa",
+    "indexable": true,
+    "sourceChars": 5396
   },
   {
     "route": "/articles/turkmenistan-transit/",
@@ -69,7 +75,7 @@
     "route": "/en/articles/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2465
+    "sourceChars": 2524
   },
   {
     "route": "/en/articles/khorgos-export-customs/",
@@ -94,6 +100,12 @@
     "lang": "en",
     "indexable": true,
     "sourceChars": 7035
+  },
+  {
+    "route": "/en/articles/sarakhs-entry-not-destination/",
+    "lang": "en",
+    "indexable": true,
+    "sourceChars": 6671
   },
   {
     "route": "/en/articles/turkmenistan-transit/",
@@ -159,7 +171,7 @@
     "route": "/zh/articles/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 1070
+    "sourceChars": 1091
   },
   {
     "route": "/zh/articles/khorgos-export-customs/",
@@ -184,6 +196,12 @@
     "lang": "zh",
     "indexable": true,
     "sourceChars": 2080
+  },
+  {
+    "route": "/zh/articles/sarakhs-entry-not-destination/",
+    "lang": "zh",
+    "indexable": true,
+    "sourceChars": 2006
   },
   {
     "route": "/zh/articles/turkmenistan-transit/",
