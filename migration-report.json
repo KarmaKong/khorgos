@@ -9,13 +9,13 @@
     "route": "/articles/from-khorgos/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 1690
+    "sourceChars": 1709
   },
   {
     "route": "/articles/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2369
+    "sourceChars": 2437
   },
   {
     "route": "/articles/khorgos-export-customs/",
@@ -33,7 +33,7 @@
     "route": "/articles/khorgos-quote-check/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 1706
+    "sourceChars": 1717
   },
   {
     "route": "/articles/loading-and-securing/",
@@ -69,13 +69,13 @@
     "route": "/en/articles/from-khorgos/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 1770
+    "sourceChars": 1783
   },
   {
     "route": "/en/articles/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2524
+    "sourceChars": 2563
   },
   {
     "route": "/en/articles/khorgos-export-customs/",
@@ -93,7 +93,7 @@
     "route": "/en/articles/khorgos-quote-check/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 1944
+    "sourceChars": 1963
   },
   {
     "route": "/en/articles/loading-and-securing/",
@@ -111,13 +111,13 @@
     "route": "/en/articles/turkmenistan-transit/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 8893
+    "sourceChars": 8855
   },
   {
     "route": "/en/articles/yiwu-or-shenzhen/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 3636
+    "sourceChars": 3608
   },
   {
     "route": "/en/",
@@ -165,13 +165,13 @@
     "route": "/zh/articles/from-khorgos/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 657
+    "sourceChars": 673
   },
   {
     "route": "/zh/articles/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 1091
+    "sourceChars": 1107
   },
   {
     "route": "/zh/articles/khorgos-export-customs/",
@@ -189,7 +189,7 @@
     "route": "/zh/articles/khorgos-quote-check/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 681
+    "sourceChars": 686
   },
   {
     "route": "/zh/articles/loading-and-securing/",
