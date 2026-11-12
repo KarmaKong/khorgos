@@ -24,6 +24,8 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run check
+      - name: Publish IndexNow key at site root
+        run: cp 132ea0186220b34b6e12ad5428d0620433d1d80513cb2148.txt dist/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

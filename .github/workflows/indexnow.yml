@@ -1,0 +1,69 @@
+name: IndexNow ping
+
+# KHG 的 Pages 走 build_type=workflow（dist/ 是构建产物、不入库），所以这里
+# 自己 build 一次，从 dist/sitemap.xml 取全量 URL 提交。
+# Google 不支持 IndexNow，Google 那边由 GSC 负责。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - name: Submit sitemap URLs to IndexNow
+        env:
+          KEY: 132ea0186220b34b6e12ad5428d0620433d1d80513cb2148
+          HOST: khorgosirantruck.com
+        run: |
+          set -euo pipefail
+          URLS="$(grep -o '<loc>[^<]*</loc>' dist/sitemap.xml | sed -e 's|</*loc>||g' | sort -u)"
+          COUNT="$(printf '%s\n' "$URLS" | grep -c . || true)"
+          echo "Submitting $COUNT URL(s) from sitemap"
+
+          code=""
+          for i in $(seq 1 30); do
+            code="$(curl -s -o /dev/null -w '%{http_code}' "https://$HOST/$KEY.txt" || true)"
+            [ "$code" = "200" ] && break
+            echo "key file HTTP $code, waiting 10s ($i/30)"
+            sleep 10
+          done
+          if [ "$code" != "200" ]; then
+            echo "Key file never went live; aborting."
+            exit 1
+          fi
+
+          BODY="$(jq -cn \
+            --arg host "$HOST" \
+            --arg key "$KEY" \
+            --arg kl "https://$HOST/$KEY.txt" \
+            --argjson list "$(printf '%s\n' "$URLS" | jq -R . | jq -s .)" \
+            '{host:$host, key:$key, keyLocation:$kl, urlList:$list}')"
+
+          code="$(curl -sS -o /tmp/indexnow.out -w '%{http_code}' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data-raw "$BODY" \
+            https://api.indexnow.org/indexnow)"
+          echo "HTTP $code"
+          cat /tmp/indexnow.out || true
+          case "$code" in
+            200|202) echo "IndexNow accepted." ;;
+            *) echo "IndexNow rejected (HTTP $code)"; exit 1 ;;
+          esac
