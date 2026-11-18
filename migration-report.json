@@ -3,13 +3,13 @@
     "route": "/articles/cbm-gross-weight/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2113
+    "sourceChars": 2144
   },
   {
     "route": "/articles/from-khorgos/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 1709
+    "sourceChars": 1740
   },
   {
     "route": "/articles/",
@@ -51,7 +51,7 @@
     "route": "/articles/turkmenistan-transit/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 7303
+    "sourceChars": 7334
   },
   {
     "route": "/articles/yiwu-or-shenzhen/",
@@ -63,13 +63,13 @@
     "route": "/en/articles/cbm-gross-weight/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2487
+    "sourceChars": 2521
   },
   {
     "route": "/en/articles/from-khorgos/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 1783
+    "sourceChars": 1817
   },
   {
     "route": "/en/articles/",
@@ -111,7 +111,7 @@
     "route": "/en/articles/turkmenistan-transit/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 8855
+    "sourceChars": 8889
   },
   {
     "route": "/en/articles/yiwu-or-shenzhen/",
@@ -159,13 +159,13 @@
     "route": "/zh/articles/cbm-gross-weight/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 790
+    "sourceChars": 803
   },
   {
     "route": "/zh/articles/from-khorgos/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 673
+    "sourceChars": 686
   },
   {
     "route": "/zh/articles/",
@@ -207,7 +207,7 @@
     "route": "/zh/articles/turkmenistan-transit/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 2598
+    "sourceChars": 2611
   },
   {
     "route": "/zh/articles/yiwu-or-shenzhen/",
