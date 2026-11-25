@@ -3,7 +3,7 @@
     "route": "/articles/cbm-gross-weight/",
     "lang": "fa",
     "indexable": true,
-    "sourceChars": 2144
+    "sourceChars": 2130
   },
   {
     "route": "/articles/from-khorgos/",
@@ -63,7 +63,7 @@
     "route": "/en/articles/cbm-gross-weight/",
     "lang": "en",
     "indexable": true,
-    "sourceChars": 2521
+    "sourceChars": 2482
   },
   {
     "route": "/en/articles/from-khorgos/",
@@ -159,7 +159,7 @@
     "route": "/zh/articles/cbm-gross-weight/",
     "lang": "zh",
     "indexable": true,
-    "sourceChars": 803
+    "sourceChars": 799
   },
   {
     "route": "/zh/articles/from-khorgos/",

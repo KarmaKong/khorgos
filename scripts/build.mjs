@@ -159,6 +159,19 @@ for(const file of files){
   for(const table of main.querySelectorAll('table'))if(!table.parentElement.classList.contains('compare-scroll')){const wrap=d.createElement('div');wrap.className='compare-scroll';table.replaceWith(wrap);wrap.append(table);}
   for(const img of main.querySelectorAll('img')){if(!img.hasAttribute('loading')&&!img.hasAttribute('fetchpriority'))img.loading='lazy';}
   redesign(d,{lang,isHome,root,c,domain,route});
+  // Social titles/descriptions must be byte-identical to the page title and meta description
+  // (CHARTER gate 3). Source pages drift: some og:title carry no brand, some carry it twice.
+  // Normalize once, after the template has set the final title.
+  {
+    const titleEl=d.querySelector('title');
+    const rawTitle=(titleEl?.textContent||'').trim();
+    const title=rawTitle.replace(/(?:\s*\|\s*khorgosirantruck)+\s*$/,' | khorgosirantruck').trim();
+    if(titleEl&&title!==rawTitle)titleEl.textContent=title;
+    const desc=(d.querySelector('meta[name="description"]')?.getAttribute('content')||'').trim();
+    const setMeta=(attr,key,value)=>{let el=d.querySelector(`meta[${attr}="${key}"]`);if(!el){el=d.createElement('meta');el.setAttribute(attr,key);d.head.appendChild(el);}el.setAttribute('content',value);};
+    setMeta('property','og:title',title);setMeta('name','twitter:title',title);
+    setMeta('property','og:description',desc);setMeta('name','twitter:description',desc);
+  }
   if(indexable&&domain)d.head.appendChild(structuredData(d,{lang,route,isHome}));
   const dest=path.join(out,rel);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,'<!DOCTYPE html>\n'+d.documentElement.outerHTML);
   audit.push({route,lang,indexable,sourceChars:baseline.length});
