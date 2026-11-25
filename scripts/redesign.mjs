@@ -33,7 +33,7 @@ export function redesign(d,{lang,isHome,root,c,domain,route}){
  d.querySelector('link[rel="icon"]').setAttribute('href',`${base}/logo/favicon.svg`);
  d.head.append(make(d,`<meta name="theme-color" content="#1F3A5F">`));
  if(domain){
-  for(const [prop,value] of [['og:url',domain+route],['og:image',domain+base+'/hero/hero-main.webp'],['og:image:width','1983'],['og:image:height','793']])d.head.append(make(d,`<meta property="${prop}" content="${value}">`));
+  for(const [prop,value] of [['og:url',domain+route],['og:image',domain+base+'/hero/hero-main.webp'],['og:image:width','1400'],['og:image:height','560']])d.head.append(make(d,`<meta property="${prop}" content="${value}">`));
   d.querySelector('meta[name="twitter:card"]')?.setAttribute('content','summary_large_image');
  }
  d.querySelector('.footer-top').after(make(d,`<div class="footer-contacts"><a dir="ltr" href="https://wa.me/8615876207182">WhatsApp +86 15876207182</a><a dir="ltr" href="mailto:sales@khorgosirantruck.com">sales@khorgosirantruck.com</a></div>`));
@@ -46,7 +46,7 @@ export function redesign(d,{lang,isHome,root,c,domain,route}){
   d.querySelector('meta[name="twitter:title"]')?.setAttribute('content',seo.title);
   d.querySelector('meta[name="twitter:description"]')?.setAttribute('content',seo.description);
   const hero=d.querySelector('.home-hero');
-  hero.querySelector('.hero-visual').innerHTML=`<img src="${base}/hero/hero-main.webp" width="1983" height="793" alt="" fetchpriority="high" decoding="async">`;
+  hero.querySelector('.hero-visual').innerHTML=`<img src="${base}/hero/hero-main.webp" width="1400" height="560" alt="" fetchpriority="high" decoding="async">`;
   const oldTitle=hero.querySelector('h1');
   oldTitle.innerHTML=t.headline.replace('\n','<br>');
   hero.querySelector('.eyebrow').textContent=t.eyebrow;
@@ -55,11 +55,11 @@ export function redesign(d,{lang,isHome,root,c,domain,route}){
   hero.querySelector('.hero-tag')?.remove();
   hero.querySelector('.hero-actions').innerHTML=`<a class="btn" href="#quote">${c.contact} <span aria-hidden="true">↗</span></a><a class="btn btn-ghost" href="#lanes">${t.routes}</a>`;
   const lanes=d.getElementById('lanes'),wrap=lanes.querySelector('.wrap');
-  wrap.innerHTML=`<div class="network-intro"><div><p class="eyebrow">${c.route}</p><h2>${t.network}</h2><p class="corridor">${t.corridor}</p><a class="text-link" href="#quote">${c.contact} <span aria-hidden="true">↗</span></a></div><figure>${picture('map/route-map.webp',1983,793)}<figcaption>${t.map}</figcaption></figure></div><ul class="route-facts">${seo.facts.map(f=>`<li>${f}</li>`).join('')}</ul>`;
+  wrap.innerHTML=`<div class="network-intro"><div><p class="eyebrow">${c.route}</p><h2>${t.network}</h2><p class="corridor">${t.corridor}</p><a class="text-link" href="#quote">${c.contact} <span aria-hidden="true">↗</span></a></div><figure>${picture('map/route-map.webp',1440,576)}<figcaption>${t.map}</figcaption></figure></div><ul class="route-facts">${seo.facts.map(f=>`<li>${f}</li>`).join('')}</ul>`;
   const cardFiles=['iran-route','central-asia-route','xinjiang-warehouse'],targets=['china-to-iran-tir-trucking','central-asia-transit','first-shipment'];
   const cardTargets=['#quote','#lanes','#cargo'];
   const serviceDescriptions=[t.desc[0],{en:'Khorgos through Kazakhstan, Uzbekistan and Turkmenistan, with the current schedule confirmed per shipment.',zh:'霍尔果斯经哈萨克斯坦、乌兹别克斯坦和土库曼斯坦，当前班次与时效按票确认。',fa:'از خورگوس، قزاقستان، ازبکستان و ترکمنستان؛ برنامه فعلی برای هر محموله تأیید می‌شود.'}[lang],t.desc[2]];
-  lanes.after(make(d,`<section class="section services" id="services"><div class="wrap"><p class="eyebrow">KHORGOS</p><h2>${t.services}</h2><div class="service-grid">${cardFiles.map((file,i)=>`<article class="service-card">${picture('cards/'+file+'.webp',686,764)}<div><span class="card-index">0${i+1}</span><h3>${t.titles[i]}</h3><p>${serviceDescriptions[i]}</p><a class="text-link" href="${cardTargets[i]}">${t.details}<span aria-hidden="true">↗</span></a></div></article>`).join('')}</div></div></section>`));
+  lanes.after(make(d,`<section class="section services" id="services"><div class="wrap"><p class="eyebrow">KHORGOS</p><h2>${t.services}</h2><div class="service-grid">${cardFiles.map((file,i)=>`<article class="service-card">${picture('cards/'+file+'.webp',600,668)}<div><span class="card-index">0${i+1}</span><h3>${t.titles[i]}</h3><p>${serviceDescriptions[i]}</p><a class="text-link" href="${cardTargets[i]}">${t.details}<span aria-hidden="true">↗</span></a></div></article>`).join('')}</div></div></section>`));
   const icons=['warehouse','border-gate','truck','truck','customs-document','delivery-terminal'];
   for(const [i,li]of [...d.querySelectorAll('.timeline>li')].entries())li.prepend(make(d,picture('icons/'+icons[i]+'.svg',40,40,'process-icon')));
   d.getElementById('cargo').after(make(d,`<section class="section border-operations"><div class="wrap border-grid"><figure>${picture('border/border-checkpoint-portrait.webp',1024,1536)}<figcaption>${t.art}</figcaption></figure><div><p class="eyebrow">KHORGOS / TIR</p><h2>${t.border}</h2><p>${t.borderCopy}</p><a class="text-link" href="#quote">${c.contact}<span aria-hidden="true">↗</span></a></div></div></section>`));

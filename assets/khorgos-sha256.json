@@ -2,10 +2,10 @@
   "background/quote-form-background.webp": "2de0851575ee03ebb033bf58af26f4a3627a435d096edcd37acb0a1ebab008a5",
   "border/border-checkpoint-portrait-alt.webp": "e597236d0405aecf6b0d77ac75a23d3be849805247a30b9faa4ab5a87d96d1b8",
   "border/border-checkpoint-portrait.webp": "2e365eab93d44f3eaf4bde1489711c07f71306c12d35f91279e41ae72ece8e30",
-  "cards/central-asia-route.webp": "0dfafde0a7321a4016c35b0f4d0e4b295e39fe437a720f3e7b13c768fc4954ba",
-  "cards/iran-route.webp": "4ad9b31f63af69da695beaf2c43817d90fa44776a04253ddb9d87e91b6b9a3ed",
-  "cards/xinjiang-warehouse.webp": "22dbad3c7fec252742bac8d20c7cdeec05adfabdada33b1cfc890eb43d9745fc",
-  "hero/hero-main.webp": "8b8d1919b82cd475f96f67a7f185078d2f2e06ba06a27f23f4192308fa549673",
+  "cards/central-asia-route.webp": "9c5b94e641e402ea60a3200a982e37a55aedde3144cdeab2fff43786466bc433",
+  "cards/iran-route.webp": "3ee13962003a23c802ee8a6675f84c0390cdfb1e34b604154f37642774b9ac71",
+  "cards/xinjiang-warehouse.webp": "56b87047801757855dc923d7ef0e43860102d35ba78c3b14d6c43250b87aede3",
+  "hero/hero-main.webp": "860218e54fdaf5f609ddd51eb23fb62b497769fce68b5cddfe818345584bb3f3",
   "hero/hero-thumbnail-alt.webp": "6a9682ae8fe1bcb6482f5589b7fc85adae5e50420ef75459e3ea8b67e96ce083",
   "icons/border-gate.svg": "3988e1821f6f5f09a64b38d0ac65401a2fb3fbf37b35c1f4eb19e98dc9d78219",
   "icons/customs-document.svg": "cfd02d757fcf27b6f4ff3bac56ec0e86324757b3d58af116147c2cc9478ccb7a",
@@ -18,5 +18,5 @@
   "logo/khorgos-icon.svg": "6acee1f4d046fb92f9b2b8fdc12276227bae6d084020bc7abeef958aff89e91e",
   "logo/khorgos-logo-horizontal.svg": "fa0abad29d9a3788b85820d9bcde929fca530911e6f31a86af4d03f6ec19ee87",
   "logo/khorgos-logo-reverse.svg": "04b91729cd604fa1786a4604d9a6e2e83fd4fc80164ea8c386531cfe18af008c",
-  "map/route-map.webp": "3aa0e6b976048d97e976f0710a6d1865746520521b3727218733e7c8318257ce"
+  "map/route-map.webp": "af9f6e28cadb522fef5eedad1bd25f1546c8063d009e915ff5f69e48ac9cc998"
 }
